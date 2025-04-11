@@ -1,0 +1,250 @@
+import { useQuery } from '@apollo/client'
+import { GET_FOOTER } from '../queries'
+import {
+    Alert,
+    Box,
+    Container,
+    Grid,
+    Link,
+    Skeleton,
+    Typography,
+    useTheme,
+    Divider
+} from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
+import RemoveIcon from '@mui/icons-material/Remove';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import PhoneIcon from '@mui/icons-material/Phone';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import WeekIcon from '../assets/icons/WeekIcon';
+
+const Footer = () => {
+    const { loading, data, error } = useQuery(GET_FOOTER)
+
+    const theme = useTheme();
+    console.log(theme.palette); // Все цвета темы
+
+    if (loading) return (
+        <Box
+            component='footer'
+            sx={{
+                py: 3,
+                px: 2,
+                backgroundColor: 'grey.50'
+            }}>
+            <Container maxWidth='lg'>
+                <Skeleton variant='text' width={'20%'} height={'2rem'} />
+                <Skeleton variant='rounded' height={'4rem'} sx={{ my: 1 }} />
+                <Skeleton variant='rounded' height={'4rem'} />
+            </Container>
+        </Box>
+    )
+
+    if (error) return (
+        <Box
+            component='footer'
+            sx={{
+                py: 3,
+                px: 2,
+                backgroundColor: 'grey.50'
+            }}>
+            <Container maxWidth='lg'>
+                <Alert severity='error' sx={{
+                    mt: 2
+                }}>
+                    <AlertTitle>Ошибка</AlertTitle>
+                    {error.message}
+                </Alert>
+            </Container>
+        </Box>
+    )
+
+    function parseTimeString(str) {
+        // Ищем последнее вхождение цифры перед примечанием
+        const timeEnd = str.match(/.*?\d(?=\D*$)/)?.[0]?.length || 0;
+
+        return {
+            timeRange: str.substring(0, timeEnd + 1).trim(),
+            note: str.substring(timeEnd + 1).trim()
+        };
+    }
+
+    const schedule = parseTimeString(data?.header?.schedule);
+
+    return (
+        <Box
+            component='footer'
+            sx={{
+                py: 3,
+                px: 2,
+                backgroundColor: 'grey.50'
+            }}>
+            <Container maxWidth='lg'>
+                <Grid container spacing={2}>
+                    <Typography variant='body1' fontWeight={700}>Услуги</Typography>
+                </Grid>
+                <Grid container spacing={2}>
+                    {data?.serviceCategories?.map((category) => (
+
+                        <Grid key={category?.documentId}
+                            size={{ xs: 12, md: 4 }}
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center'
+                            }}>
+                            <RemoveIcon />
+                            <Link
+                                component={RouterLink} to={'/uslugi/' + category.slug}
+                                sx={{
+                                    color: '#000',
+                                    textDecoration: 'none',
+                                    fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+                                    '&:hover': {
+                                        color: 'primary.main',
+                                        textDecoration: 'underline'
+                                    }
+                                }}
+                            >{category?.title}</Link>
+                        </Grid>
+                    ))}
+                </Grid>
+                <Divider sx={{ my: 2 }} />
+
+                <Grid container spacing={1} sx={{
+                    '& .MuiSvgIcon-root': {
+                        width: '40px',
+                        height: '40px',
+                        color: 'red'
+                    },
+                    '& .MuiTypography-root': {
+                        display: 'block',
+                    },
+                    '& .MuiTypography-body1': {
+                        fontSize: { xs: '1.5rem', md: '1.15rem' },
+                        fontWeight: '700'
+                    },
+                    '& .MuiGrid-container': {
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }
+                }}>
+                    <Grid size={{ xs: 12, md: 2 }}>
+                        <Box
+                            component={RouterLink}
+                            to={'/'}>
+                            <Grid container spacing={0}>
+                                <Grid size={{ xs: 5 }} sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}>
+                                    <Box
+                                        component='img'
+                                        src={import.meta.env.VITE_URL + data?.header?.logo?.url}
+                                        alt={data?.header?.logo?.caption}
+                                        sx={{
+                                            height: 48,
+                                            maxWidth: '100%'
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid size={{ xs: 5 }}>
+                                    <Typography variant='body1'>
+                                        {data?.header?.title}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 2 }}>
+                        <Grid container spacing={1}>
+                            <Grid size={{ xs: 3 }}>
+                                <WeekIcon />
+                            </Grid>
+                            <Grid>
+                                <Typography variant='caption' sx={{
+                                    fontSize: '1rem',
+                                    fontWeight: '700'
+                                }}>
+                                    {schedule.timeRange}
+                                </Typography>
+                                <Typography variant='caption' sx={{
+                                    textAlign: { xs: 'left', md: 'right' },
+                                    color: 'text.secondary'
+                                }}>
+                                    {schedule.note}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 3 }}>
+                        <Link href={'mailto:' + data?.header?.email}>
+                            <Grid container spacing={1}>
+                                <Grid size={{ xs: 2 }}>
+                                    <AlternateEmailIcon />
+                                </Grid>
+                                <Grid>
+                                    <Typography variant='caption' sx={{
+                                        fontSize: '1rem',
+                                        fontWeight: '700'
+                                    }}>{data?.header?.email}</Typography>
+                                    <Typography variant='caption' sx={{
+                                        textAlign: { xs: 'left', md: 'right' },
+                                        color: 'text.secondary'
+                                    }}>{data?.header?.emailCaption}</Typography>
+                                </Grid>
+                            </Grid>
+                        </Link>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 3 }}>
+                        <Link href={'tel:' + data?.header?.phone}>
+                            <Grid container spacing={1}>
+                                <Grid size={{ xs: 2 }}>
+                                    <PhoneIcon />
+                                </Grid>
+                                <Grid>
+                                    <Typography variant='caption' sx={{
+                                        fontSize: '1rem',
+                                        fontWeight: '700'
+                                    }}>{data?.header?.phone}</Typography>
+                                    <Typography variant='caption' sx={{
+                                        textAlign: { xs: 'left', md: 'right' },
+                                        color: 'text.secondary'
+                                    }}>{data?.header?.phoneCaption}</Typography>
+                                </Grid>
+                            </Grid>
+                        </Link>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 2 }}>
+                        <Link href={data?.header?.telegramLink}>
+                            <Grid container spacing={1}>
+                                <Grid size={{ xs: 2 }}>
+                                    <TelegramIcon />
+                                </Grid>
+                                <Grid>
+                                    <Typography variant='caption' sx={{
+                                        fontSize: '1rem',
+                                        fontWeight: '700'
+                                    }}>TELEGRAM</Typography>
+                                    <Typography variant='caption' sx={{
+                                        textAlign: { xs: 'left', md: 'right' },
+                                        color: 'text.secondary'
+                                    }}>{data?.header?.telegramCaption}</Typography>
+                                </Grid>
+                            </Grid>
+                        </Link>
+                    </Grid>
+                </Grid>
+                <Grid container sx={{
+                    mt: 2,
+                    justifyContent: 'center'
+                }}>
+                    <Grid>
+                        <Typography>Copyright © {new Date().getFullYear()}</Typography>
+                    </Grid>
+                </Grid>
+            </Container>
+        </Box>
+    )
+}
+
+export default Footer
