@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_shared_advantage_cards",
+  "info": {
+    "displayName": "advantage-card"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 200,
+      "default": "Гарантия 5 лет"
+    },
+    "highlightColor": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_sections_advantages",
+  "info": {
+    "displayName": "Advantages"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "card": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.advantage-card"
+    }
+  }
+}

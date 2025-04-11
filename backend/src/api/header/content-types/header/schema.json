@@ -1,0 +1,59 @@
+{
+  "kind": "singleType",
+  "collectionName": "headers",
+  "info": {
+    "singularName": "header",
+    "pluralName": "headers",
+    "displayName": "Header",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "menu": {
+      "displayName": "menu",
+      "type": "component",
+      "repeatable": true,
+      "component": "header.menu"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "schedule": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "emailCaption": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "phoneCaption": {
+      "type": "string",
+      "default": "Позвоните нам",
+      "maxLength": 20
+    },
+    "telegramLink": {
+      "type": "string",
+      "default": "https://t.me/Office_globus_okna"
+    },
+    "telegramCaption": {
+      "type": "string",
+      "default": "Напишите нам",
+      "maxLength": 20
+    }
+  }
+}
