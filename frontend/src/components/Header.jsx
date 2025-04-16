@@ -21,10 +21,9 @@ import {
     ListItemText,
 } from '@mui/material';
 import { useState } from 'react';
-import { GET_HEADER } from '../queries';
+import { GET_HEADER } from '../pages/api/queries';
 import { useQuery } from '@apollo/client';
-import { Link as RouterLink, useLocation } from 'react-router-dom'
-import WeekIcon from '../assets/icons/WeekIcon';
+import WeekIcon from '../../public/icons/WeekIcon';
 import {
     AlternateEmail as AlternateEmailIcon,
     Phone as PhoneIcon,
@@ -34,11 +33,14 @@ import {
     ChevronRight as ChevronRightIcon,
 } from '@mui/icons-material'
 import CallBackModal from './CallbackModal';
+import LinkWrapper from './LinkWrapper';
+import { useRouter } from 'next/router'
 
 const Header = () => {
     const { loading, data, error } = useQuery(GET_HEADER);
     const [mobileOpen, setMobileOpen] = useState(false);
-    const { pathname } = useLocation();
+    const router = useRouter();
+    const pathname = router.pathname;
     // Button Services
     const [anchorEl, setAnchorEl] = useState(null);
     const [tabValue, setTabValue] = useState(0);
@@ -145,36 +147,39 @@ const Header = () => {
             >
                 <Container>
                     <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
-                        <Box
-                            component={RouterLink}
-                            to='/'
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                mr: 4,
-                                textDecoration: 'none'
-                            }}>
+                        <LinkWrapper href='/'>
                             <Box
-                                component="img"
-                                src={import.meta.env.VITE_URL + data?.header?.logo?.url}
-                                alt={data?.header?.logo?.caption}
                                 sx={{
-                                    height: 40,
-                                    width: 'auto',
-                                    mr: 2
-                                }}
-                            />
-                            <Typography
-                                variant="h6"
-                                component="div"
-                                sx={{
-                                    fontWeight: 700,
-                                    color: 'text.primary'
-                                }}
-                            >
-                                {data?.header?.title}
-                            </Typography>
-                        </Box>
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    mr: 4,
+                                    textDecoration: 'none',
+                                    '&:hover': {
+                                        cursor: 'pointer'
+                                    }
+                                }}>
+                                <Box
+                                    component="img"
+                                    src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + data?.header?.logo?.url}
+                                    alt={data?.header?.logo?.caption}
+                                    sx={{
+                                        height: 40,
+                                        width: 'auto',
+                                        mr: 2
+                                    }}
+                                />
+                                <Typography
+                                    variant="h6"
+                                    component="div"
+                                    sx={{
+                                        fontWeight: 700,
+                                        color: 'text.primary'
+                                    }}
+                                >
+                                    {data?.header?.title}
+                                </Typography>
+                            </Box>
+                        </LinkWrapper>
 
                         {/* Меню для десктопа */}
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -194,11 +199,12 @@ const Header = () => {
                                                     color: 'white'
                                                 },
                                             }}
+                                            startIcon={<MenuIcon />}
                                         >
-                                            <MenuIcon sx={{ pr: 3 }} />
                                             {item.title}
                                         </Button>
                                         <Menu
+                                            disableScrollLock
                                             anchorEl={anchorEl}
                                             open={open}
                                             onClose={handleHeaderServicesClose}
@@ -208,7 +214,11 @@ const Header = () => {
                                                     maxWidth: '800px',
                                                     borderRadius: '8px',
                                                     mt: 1,
-                                                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)'
+                                                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
+                                                    '& .MuiPaper-root': {
+                                                        overflow: 'hidden !important',
+                                                        pr: 0
+                                                    }
                                                 }
                                             }}>
                                             <Paper sx={{ display: 'flex', width: '100%' }}>
@@ -240,24 +250,25 @@ const Header = () => {
                                                     maxHeight: '65vh'
                                                 }}>
                                                     {data?.serviceCategories?.[tabValue]?.services?.map((service) => (
-                                                        <MenuItem
+                                                        <LinkWrapper
                                                             key={service.documentId}
-                                                            component={RouterLink}
-                                                            to={'/uslugi/' + service.slug}
-                                                            onClick={handleHeaderServicesClose}
-                                                            sx={{
-                                                                px: 2,
-                                                                py: 1.5,
-                                                                borderRadius: 1,
-                                                                '&:hover': {
-                                                                    bgcolor: 'action.hover'
-                                                                }
-                                                            }}>
-                                                            <ListItemText
-                                                                primary={service.title}
-                                                                primaryTypographyProps={{ fontWeight: 500 }} />
-                                                            <ChevronRightIcon color='action' />
-                                                        </MenuItem>
+                                                            href={'/uslugi/' + service.slug}>
+                                                            <MenuItem
+                                                                onClick={handleHeaderServicesClose}
+                                                                sx={{
+                                                                    px: 2,
+                                                                    py: 1.5,
+                                                                    borderRadius: 1,
+                                                                    '&:hover': {
+                                                                        bgcolor: 'action.hover'
+                                                                    }
+                                                                }}>
+                                                                <ListItemText
+                                                                    primary={service.title}
+                                                                    primaryTypographyProps={{ fontWeight: 500 }} />
+                                                                <ChevronRightIcon color='action' />
+                                                            </MenuItem>
+                                                        </LinkWrapper>
                                                     ))}
                                                 </Box>
                                             </Paper>
@@ -265,23 +276,24 @@ const Header = () => {
                                     </Box>
 
                                 ) : (
-                                    <Button
+                                    <LinkWrapper
                                         key={item.id}
-                                        to={item.url}
-                                        component={RouterLink}
-                                        variant='text'
-                                        color='text.primary'
-                                        sx={{
-                                            mx: 1,
-                                            fontWeight: 500,
-                                            fontSize: { xs: '0.8rem', lg: '0.875rem' },
-                                            '&:hover': {
-                                                color: 'primary.main'
-                                            },
-                                        }}
-                                    >
-                                        {item.title}
-                                    </Button>
+                                        href={item.url}>
+                                        <Button
+                                            variant='text'
+                                            color='text.primary'
+                                            sx={{
+                                                mx: 1,
+                                                fontWeight: 500,
+                                                fontSize: { xs: '0.8rem', lg: '0.875rem' },
+                                                '&:hover': {
+                                                    color: 'primary.main'
+                                                },
+                                            }}
+                                        >
+                                            {item.title}
+                                        </Button>
+                                    </LinkWrapper>
                                 )
                             ))}
                             <Button
@@ -342,7 +354,7 @@ const Header = () => {
                 py: 2,
                 display: { xs: 'none', md: pathname === '/' && 'block' },
                 position: 'relative',
-                zIndex: 2
+                zIndex: 2,
             }}>
                 <Grid container spacing={2} alignItems='center'>
                     <Grid size={{ md: 3 }}>
@@ -478,24 +490,24 @@ const Header = () => {
                                 borderColor: 'divider'
                             }}
                         >
-                            <Button
-                                to={item.url}
-                                component={RouterLink}
-                                fullWidth
-                                sx={{
-                                    py: 2,
-                                    px: 3,
-                                    justifyContent: 'flex-start',
-                                    color: 'text.primary',
-                                    '&:hover': {
-                                        color: 'primary.main',
-                                        backgroundColor: 'action.hover'
-                                    }
-                                }}
-                                onClick={handleDrawerToggle}
-                            >
-                                {item.title}
-                            </Button>
+                            <LinkWrapper href={item.url}>
+                                <Button
+                                    fullWidth
+                                    sx={{
+                                        py: 2,
+                                        px: 3,
+                                        justifyContent: 'flex-start',
+                                        color: 'text.primary',
+                                        '&:hover': {
+                                            color: 'primary.main',
+                                            backgroundColor: 'action.hover'
+                                        }
+                                    }}
+                                    onClick={handleDrawerToggle}
+                                >
+                                    {item.title}
+                                </Button>
+                            </LinkWrapper>
                         </ListItem>
                     ))}
 

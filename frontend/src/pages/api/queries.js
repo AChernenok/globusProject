@@ -66,10 +66,8 @@ query HomePage{
         card {
           title
           id
-          icon {
-            formats
-            url
-          }
+          icon
+          description
         }
       }
     }

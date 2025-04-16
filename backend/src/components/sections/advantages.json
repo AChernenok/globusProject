@@ -1,7 +1,8 @@
 {
   "collectionName": "components_sections_advantages",
   "info": {
-    "displayName": "Advantages"
+    "displayName": "Advantages",
+    "description": ""
   },
   "options": {},
   "attributes": {

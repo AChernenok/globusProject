@@ -50,6 +50,8 @@ const Banner = ({ src, loading, error }) => {
         </Container>
     </Box>)
 
+    console.log(src?.animatedText)
+
     const iconMap = {
         HelpOutline,
         VerifiedUser,
@@ -63,11 +65,12 @@ const Banner = ({ src, loading, error }) => {
                 backgroundImage:
                 {
                     xs: 'none',
-                    md: `url(${import.meta.env.VITE_URL + src?.backgroundImage?.url}) `,
+                    md: `url(${process.env.NEXT_PUBLIC_STRAPI_BASE_URL + src?.backgroundImage?.url}) `,
                 },
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'contain',
-                backgroundPosition: 'right'
+                backgroundPosition: 'right',
+                bgcolor: 'background.light'
             }}>
                 <Container sx={{
                     pt: 8,
@@ -108,6 +111,9 @@ const Banner = ({ src, loading, error }) => {
                                     speed={70}
                                     repeat={Infinity} />
                             </Typography>
+                            <Box sx={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
+                                {src?.animatedText?.filter(item => typeof item === 'string').join(' ')}
+                            </Box>
                         </Grid>
                     </Grid>
                     <Grid container spacing={2}>

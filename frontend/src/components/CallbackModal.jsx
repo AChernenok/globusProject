@@ -15,8 +15,7 @@ import {
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloseIcon from '@mui/icons-material/Close';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink } from 'next/link'
 
 const CallBackModal = ({ open, onClose }) => {
     const [formData, setFormData] = useState({
@@ -278,19 +277,6 @@ const CallBackModal = ({ open, onClose }) => {
                             </Box>
                             <Box sx={{ my: 2 }}>
                                 <Typography variant='caption'>Отправляя данные вы соглашаетесь с <Link component={RouterLink} to={'/politika-konfidenczialnosti'} onClick={onClose}>политикой конфиденциальности</Link></Typography>
-                            </Box>
-
-                            {/* reCAPTCHA */}
-                            <Box sx={{ my: 2 }}>
-                                <ReCAPTCHA
-                                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                                    onChange={(token) => setCaptcha(token)}
-                                />
-                                {errors.captcha && (
-                                    <Typography color="error" variant="caption">
-                                        {errors.captcha}
-                                    </Typography>
-                                )}
                             </Box>
 
                             {/* Кнопки "Отмена" и "Отправить" */}

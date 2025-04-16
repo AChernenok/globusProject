@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { GET_FOOTER } from '../queries'
+import { GET_FOOTER } from '../pages/api/queries'
 import {
     Alert,
     Box,
@@ -11,12 +11,12 @@ import {
     useTheme,
     Divider
 } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
 import RemoveIcon from '@mui/icons-material/Remove';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import PhoneIcon from '@mui/icons-material/Phone';
 import TelegramIcon from '@mui/icons-material/Telegram';
-import WeekIcon from '../assets/icons/WeekIcon';
+import WeekIcon from '../../public/icons/WeekIcon';
+import LinkWrapper from './LinkWrapper';
 
 const Footer = () => {
     const { loading, data, error } = useQuery(GET_FOOTER)
@@ -77,7 +77,7 @@ const Footer = () => {
             sx={{
                 py: 3,
                 px: 2,
-                backgroundColor: 'grey.50'
+                backgroundColor: 'grey.50',
             }}>
             <Container maxWidth='lg'>
                 <Grid container spacing={2}>
@@ -93,18 +93,19 @@ const Footer = () => {
                                 alignItems: 'center'
                             }}>
                             <RemoveIcon />
-                            <Link
-                                component={RouterLink} to={'/uslugi/' + category.slug}
-                                sx={{
-                                    color: '#000',
-                                    textDecoration: 'none',
-                                    fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
-                                    '&:hover': {
-                                        color: 'primary.main',
-                                        textDecoration: 'underline'
-                                    }
-                                }}
-                            >{category?.title}</Link>
+                            <LinkWrapper href={'/uslugi/' + category?.slug}>
+                                <Typography
+                                    sx={{
+                                        color: '#000',
+                                        textDecoration: 'none',
+                                        fontFamily: '"Roboto","Helvetica","Arial",sans-serif',
+                                        '&:hover': {
+                                            color: 'primary.main',
+                                            textDecoration: 'underline'
+                                        }
+                                    }}
+                                >{category?.title}</Typography>
+                            </LinkWrapper>
                         </Grid>
                     ))}
                 </Grid>
@@ -129,17 +130,15 @@ const Footer = () => {
                     }
                 }}>
                     <Grid size={{ xs: 12, md: 2 }}>
-                        <Box
-                            component={RouterLink}
-                            to={'/'}>
-                            <Grid container spacing={0}>
+                        <LinkWrapper href='/'>
+                            <Grid container spacing={0} sx={{ '&:hover': { cursor: 'pointer' } }}>
                                 <Grid size={{ xs: 5 }} sx={{
                                     display: 'flex',
                                     justifyContent: 'center'
                                 }}>
                                     <Box
                                         component='img'
-                                        src={import.meta.env.VITE_URL + data?.header?.logo?.url}
+                                        src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + data?.header?.logo?.url}
                                         alt={data?.header?.logo?.caption}
                                         sx={{
                                             height: 48,
@@ -153,7 +152,7 @@ const Footer = () => {
                                     </Typography>
                                 </Grid>
                             </Grid>
-                        </Box>
+                        </LinkWrapper>
                     </Grid>
                     <Grid size={{ xs: 12, md: 2 }}>
                         <Grid container spacing={1}>

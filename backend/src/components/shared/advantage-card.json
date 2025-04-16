@@ -1,17 +1,11 @@
 {
   "collectionName": "components_shared_advantage_cards",
   "info": {
-    "displayName": "advantage-card"
+    "displayName": "advantage-card",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "icon": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false
-    },
     "title": {
       "type": "string"
     },
@@ -22,6 +16,16 @@
     },
     "highlightColor": {
       "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "Discount",
+        "Cleaning Services",
+        "SentimentSatisfiedAlt",
+        "Clock",
+        "Flock"
+      ]
     }
   }
 }

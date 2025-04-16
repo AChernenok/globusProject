@@ -33,6 +33,7 @@ export interface HeaderMenu extends Struct.ComponentSchema {
 export interface SectionsAdvantages extends Struct.ComponentSchema {
   collectionName: 'components_sections_advantages';
   info: {
+    description: '';
     displayName: 'Advantages';
   };
   attributes: {
@@ -44,6 +45,7 @@ export interface SectionsAdvantages extends Struct.ComponentSchema {
 export interface SharedAdvantageCard extends Struct.ComponentSchema {
   collectionName: 'components_shared_advantage_cards';
   info: {
+    description: '';
     displayName: 'advantage-card';
   };
   attributes: {
@@ -53,7 +55,15 @@ export interface SharedAdvantageCard extends Struct.ComponentSchema {
       }> &
       Schema.Attribute.DefaultTo<'\u0413\u0430\u0440\u0430\u043D\u0442\u0438\u044F 5 \u043B\u0435\u0442'>;
     highlightColor: Schema.Attribute.String;
-    icon: Schema.Attribute.Media<'images'>;
+    icon: Schema.Attribute.Enumeration<
+      [
+        'Discount',
+        'Cleaning Services',
+        'SentimentSatisfiedAlt',
+        'Clock',
+        'Flock',
+      ]
+    >;
     title: Schema.Attribute.String;
   };
 }
