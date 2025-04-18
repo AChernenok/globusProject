@@ -15,9 +15,9 @@ import {
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link as RouterLink } from 'next/link'
+import { Link as RouterLink } from 'next/link';
 
-const CallBackModal = ({ open, onClose }) => {
+const CallBackModal = ({ open, onClose, formCalculateData = {}, resetForm }) => {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -71,34 +71,99 @@ const CallBackModal = ({ open, onClose }) => {
 
         try {
             const formDataToSend = new FormData();
-            formDataToSend.append('chat_id', import.meta.env.VITE_TELEGRAM_CHAT_ID);
-            formDataToSend.append(
-                'caption',
-                `📌 Новая заявка:\n\n👤 Имя: ${formData.name}\n📞 Телефон: ${formData.phone}\n📝 Описание: ${formData.description || 'не указано'}`
-            );
+            formDataToSend.append('chat_id', process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID);
 
-            if (formData.photo) {
-                formDataToSend.append('photo', formData.photo);
-            } else {
-                const response = await fetch(`https://api.telegram.org/bot${import.meta.env.VITE_TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: import.meta.env.VITE_TELEGRAM_CHAT_ID,
-                        text: `📌 Новая заявка:\n\n👤 Имя: ${formData.name}\n📞 Телефон: ${formData.phone}\n📝 Описание: ${formData.description || 'не указано'}`,
-                    }),
-                });
-                if (!response.ok) throw new Error('Ошибка отправки');
-                handleSuccess();
-                return;
+            let message = `📌 Новая заявка:\n\n👤 Имя: ${formData.name}\n📞 Телефон: ${formData.phone}\n📝 Описание: ${formData.description || 'не указано'}`;
+
+            // Добавляем данные из калькулятора (если есть)
+            if (formCalculateData && formCalculateData.agree === true) {
+                message += `\n\nДанные из калькулятора:`;
+
+                // Обработка repairTypes
+                const repairTypes = formCalculateData.repairTypes
+                    ? formCalculateData.repairTypes.join(", ")
+                    : "не выбрано";
+                message += `\n\nВид ремонта: ${repairTypes}`;
+
+                // Обработка windowMeasurements
+                let windowMeasurements = "не заполнено";
+                if (formCalculateData.windowMeasurements) {
+                    const measurements = [];
+                    for (const [windowName, value] of Object.entries(formCalculateData.windowMeasurements)) {
+                        if (value.width && value.height) {
+                            measurements.push(`${windowName}: ${value.width}x${value.height} мм`);
+                        }
+                    }
+                    windowMeasurements = measurements.join("; ");
+                }
+                message += `\n\nРазмеры окна: ${windowMeasurements}`;
+
+                // Обработка openedWindows
+                let openedWindows = "не выбрано";
+                if (formCalculateData.openedWindows) {
+                    const windows = formCalculateData.openedWindows.map(item =>
+                        `${item.windowType}: ${item.openings.join(", ")} (${item.count} шт.)`
+                    );
+                    openedWindows = windows.join("; ");
+                }
+                message += `\n\nОткрытые окна: ${openedWindows}`;
+
+                // Обработка местоположения
+                let locationInfo = "не указано";
+                if (formCalculateData.repairLocation === "in_city") {
+                    locationInfo = "в городе";
+                } else if (formCalculateData.distance) {
+                    locationInfo = `${formCalculateData.distance}км от города`;
+                }
+                message += `\n\nНаходится: ${locationInfo}`;
             }
 
-            const response = await fetch(`https://api.telegram.org/bot${import.meta.env.VITE_TELEGRAM_BOT_TOKEN}/sendPhoto`, {
-                method: 'POST',
-                body: formDataToSend,
-            });
+            // Отправка в Telegram
+            if (formData.photo) {
+                formDataToSend.append('photo', formData.photo);
+                formDataToSend.append('caption', message);
 
-            if (!response.ok) throw new Error('Ошибка отправки фото');
+                const telegramResponse = await fetch(
+                    `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}/sendPhoto`,
+                    {
+                        method: 'POST',
+                        body: formDataToSend,
+                    }
+                );
+                if (!telegramResponse.ok) throw new Error('Ошибка отправки фото в Telegram');
+            } else {
+                const telegramResponse = await fetch(
+                    `https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}/sendMessage`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
+                            text: message,
+                        }),
+                    }
+                );
+                if (!telegramResponse.ok) throw new Error('Ошибка отправки сообщения в Telegram');
+            }
+
+            const strapiData = {
+                name: formData.name,
+                phone: formData.phone,
+                text: message
+            };
+
+
+            const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}/api/request-services`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ data: strapiData }),
+                }
+            );
+            if (!response.ok) throw new Error("Ошибка при отправке");
+
             handleSuccess();
         } catch (error) {
             setAlert({
@@ -119,6 +184,7 @@ const CallBackModal = ({ open, onClose }) => {
         });
         setFormData({ name: '', phone: '', description: '', photo: null });
         setCaptcha(null);
+        resetForm();
         onClose();
     };
 

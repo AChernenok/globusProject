@@ -6,7 +6,6 @@ import {
     Button,
     Container,
     Link,
-    Stack,
     Drawer,
     List,
     ListItem,
@@ -439,11 +438,15 @@ const Header = () => {
                                 color: '#f44346',
                                 mr: 1
                             }} />
-                            <Link href={data?.header?.telegramLink} sx={{
-                                textDecoration: 'none',
-                                display: 'flex',
-                                flexDirection: 'column'
-                            }}>
+                            <Link
+                                href={data?.header?.telegramLink}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                sx={{
+                                    textDecoration: 'none',
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}>
                                 <Typography fontSize={'1.2rem'} fontWeight='bold'>
                                     TELEGRAM
                                 </Typography>

@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "calculate_windows",
+  "info": {
+    "singularName": "calculate-window",
+    "pluralName": "calculate-windows",
+    "displayName": "CalculateWindow",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "windowTypes": {
+      "displayName": "windowType",
+      "type": "component",
+      "repeatable": true,
+      "component": "calculate.window-type"
+    },
+    "repairType": {
+      "displayName": "RepairType",
+      "type": "component",
+      "repeatable": true,
+      "component": "calculate.repair-type"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

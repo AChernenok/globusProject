@@ -21,10 +21,10 @@
       "type": "enumeration",
       "enum": [
         "Discount",
-        "Cleaning Services",
+        "CleaningServices",
         "SentimentSatisfiedAlt",
-        "Clock",
-        "Flock"
+        "ShowChart",
+        "VerifiedUser"
       ]
     }
   }

@@ -20,7 +20,8 @@
       "type": "dynamiczone",
       "components": [
         "banner.hero-banner",
-        "sections.advantages"
+        "sections.advantages",
+        "sections.master"
       ]
     },
     "portfolio_items": {

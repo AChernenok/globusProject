@@ -2,7 +2,6 @@ import { Typography, Box, Grid, Card, CardActionArea, CardMedia, CardContent, Ba
 import LinkWrapper from "./LinkWrapper"
 
 const PopularServiceBlock = ({ services }) => {
-    console.log(services)
     return (
         <Box sx={{
             py: 3

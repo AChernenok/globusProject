@@ -70,6 +70,19 @@ query HomePage{
           description
         }
       }
+      ... on ComponentSectionsMaster {
+        id
+        title
+        items {
+          id
+          description
+          icon
+        }
+        titleBlock
+        descriptionBlock
+        textButton
+        linkButton
+      }
     }
   }
   services(filters: { popular: { eq: true }}, pagination: { limit: 12 }){
@@ -84,6 +97,22 @@ query HomePage{
     service_category {
       title
     } 
+  }
+  calculateWindow {
+    title
+    windowTypes {
+      openings
+      name
+      image {
+        url
+      }
+      id
+    }
+    repairType {
+      price
+      name
+      id
+    }
   }
 }
 `
@@ -123,6 +152,27 @@ query Footer{
     title
     slug
     documentId
+  }
+}
+`
+
+export const GET_PORTFOLIO = gql`
+query PortfolioItems {
+  portfolioItems {
+    title
+    workDescription
+    services {
+      title
+    }
+    documentId
+    minImage {
+      url
+      formats
+    }
+    gallery {
+      url
+      formats
+    }
   }
 }
 `

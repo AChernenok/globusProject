@@ -17,6 +17,37 @@ export interface BannerHeroBanner extends Struct.ComponentSchema {
   };
 }
 
+export interface CalculateRepairType extends Struct.ComponentSchema {
+  collectionName: 'components_calculate_repair_types';
+  info: {
+    displayName: 'RepairType';
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    price: Schema.Attribute.Integer;
+  };
+}
+
+export interface CalculateWindowType extends Struct.ComponentSchema {
+  collectionName: 'components_calculate_window_types';
+  info: {
+    displayName: 'windowType';
+  };
+  attributes: {
+    basePrice: Schema.Attribute.Integer;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    name: Schema.Attribute.String;
+    openings: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+        },
+        number
+      >;
+  };
+}
+
 export interface HeaderMenu extends Struct.ComponentSchema {
   collectionName: 'components_header_menus';
   info: {
@@ -42,6 +73,23 @@ export interface SectionsAdvantages extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsMaster extends Struct.ComponentSchema {
+  collectionName: 'components_sections_masters';
+  info: {
+    description: '';
+    displayName: 'master';
+    icon: 'bell';
+  };
+  attributes: {
+    descriptionBlock: Schema.Attribute.String;
+    items: Schema.Attribute.Component<'shared.master-card', true>;
+    linkButton: Schema.Attribute.String;
+    textButton: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    titleBlock: Schema.Attribute.String;
+  };
+}
+
 export interface SharedAdvantageCard extends Struct.ComponentSchema {
   collectionName: 'components_shared_advantage_cards';
   info: {
@@ -58,10 +106,10 @@ export interface SharedAdvantageCard extends Struct.ComponentSchema {
     icon: Schema.Attribute.Enumeration<
       [
         'Discount',
-        'Cleaning Services',
+        'CleaningServices',
         'SentimentSatisfiedAlt',
-        'Clock',
-        'Flock',
+        'ShowChart',
+        'VerifiedUser',
       ]
     >;
     title: Schema.Attribute.String;
@@ -79,6 +127,21 @@ export interface SharedBulletPoints extends Struct.ComponentSchema {
       Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     icon: Schema.Attribute.Enumeration<['VerifiedUser', 'Alarm', 'ShowChart']>;
     text: Schema.Attribute.String;
+  };
+}
+
+export interface SharedMasterCard extends Struct.ComponentSchema {
+  collectionName: 'components_shared_master_cards';
+  info: {
+    description: '';
+    displayName: 'master-card';
+    icon: 'bulletList';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Enumeration<
+      ['CheckCircleOutline', 'CheckCircle', 'Check', 'TaskAlt']
+    >;
   };
 }
 
@@ -148,10 +211,14 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'banner.hero-banner': BannerHeroBanner;
+      'calculate.repair-type': CalculateRepairType;
+      'calculate.window-type': CalculateWindowType;
       'header.menu': HeaderMenu;
       'sections.advantages': SectionsAdvantages;
+      'sections.master': SectionsMaster;
       'shared.advantage-card': SharedAdvantageCard;
       'shared.bullet-points': SharedBulletPoints;
+      'shared.master-card': SharedMasterCard;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

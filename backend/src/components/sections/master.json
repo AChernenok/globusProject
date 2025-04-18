@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_sections_masters",
+  "info": {
+    "displayName": "master",
+    "icon": "bell",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "items": {
+      "displayName": "master-card",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.master-card"
+    },
+    "titleBlock": {
+      "type": "string"
+    },
+    "descriptionBlock": {
+      "type": "string"
+    },
+    "textButton": {
+      "type": "string"
+    },
+    "linkButton": {
+      "type": "string"
+    }
+  }
+}

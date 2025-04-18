@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_calculate_window_types",
+  "info": {
+    "displayName": "windowType"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "openings": {
+      "type": "integer",
+      "required": true,
+      "max": 3
+    },
+    "basePrice": {
+      "type": "integer"
+    }
+  }
+}

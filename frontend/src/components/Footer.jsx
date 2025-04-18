@@ -77,6 +77,7 @@ const Footer = () => {
             sx={{
                 py: 3,
                 px: 2,
+                mt: 2,
                 backgroundColor: 'grey.50',
             }}>
             <Container maxWidth='lg'>
@@ -214,9 +215,13 @@ const Footer = () => {
                         </Link>
                     </Grid>
                     <Grid size={{ xs: 12, md: 2 }}>
-                        <Link href={data?.header?.telegramLink}>
+                        <Link
+                            href={data?.header?.telegramLink}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                        >
                             <Grid container spacing={1}>
-                                <Grid size={{ xs: 2 }}>
+                                <Grid size={{ xs: 3 }}>
                                     <TelegramIcon />
                                 </Grid>
                                 <Grid>

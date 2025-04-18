@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_calculate_repair_types",
+  "info": {
+    "displayName": "RepairType"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    }
+  }
+}

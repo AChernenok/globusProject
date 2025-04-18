@@ -5,6 +5,9 @@ import { useQuery } from "@apollo/client";
 import CallbackBlock from "../components/CallbackBlock";
 import PopularServiceBlock from "../components/PopularServicesBlock";
 import Advantages from "@/components/Advantages";
+import MasterBlock from "@/components/MasterBlock";
+import WindowCalculate from "@/components/WindowCalculate";
+import PortfolioBlock from "@/components/PortfolioBlock";
 
 const HomePage = () => {
   const { loading, data, error } = useQuery(GET_HOME_PAGE);
@@ -18,7 +21,6 @@ const HomePage = () => {
       {error.message}
     </Alert>)
 
-  console.log(data)
   return (
     <>
       <Banner
@@ -27,7 +29,7 @@ const HomePage = () => {
         error={error}
       />
       <Box sx={{
-        bgcolor: '#EEEEEE',
+        bgcolor: 'grey.50',
         p: 3
       }}>
         <Container>
@@ -37,8 +39,21 @@ const HomePage = () => {
       <Container>
         <PopularServiceBlock services={data?.services} />
       </Container>
+      <Box sx={{ bgcolor: 'grey.50', py: 3 }}>
+        <Container>
+          <Advantages advantages={data?.homePage?.sections.find(obj => obj.__typename === 'ComponentSectionsAdvantages')} />
+        </Container>
+      </Box>
+      <Box>
+        <Container>
+          <MasterBlock master={data?.homePage?.sections.find(obj => obj.__typename === 'ComponentSectionsMaster')} />
+        </Container>
+      </Box>
+      <Box>
+        <WindowCalculate calculateBlock={data?.calculateWindow} />
+      </Box>
       <Container>
-        <Advantages advantages={data?.homePage?.sections.find(obj => obj.__typename === 'ComponentSectionsAdvantages')} />
+        <PortfolioBlock />
       </Container>
     </>
   )

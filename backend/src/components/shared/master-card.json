@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_master_cards",
+  "info": {
+    "displayName": "master-card",
+    "icon": "bulletList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "CheckCircleOutline",
+        "CheckCircle",
+        "Check",
+        "TaskAlt"
+      ]
+    }
+  }
+}

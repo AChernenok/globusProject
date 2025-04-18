@@ -470,6 +470,38 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCalculateWindowCalculateWindow
+  extends Struct.SingleTypeSchema {
+  collectionName: 'calculate_windows';
+  info: {
+    description: '';
+    displayName: 'CalculateWindow';
+    pluralName: 'calculate-windows';
+    singularName: 'calculate-window';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::calculate-window.calculate-window'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    repairType: Schema.Attribute.Component<'calculate.repair-type', true>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    windowTypes: Schema.Attribute.Component<'calculate.window-type', true>;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -643,7 +675,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     >;
     publishedAt: Schema.Attribute.DateTime;
     sections: Schema.Attribute.DynamicZone<
-      ['banner.hero-banner', 'sections.advantages']
+      ['banner.hero-banner', 'sections.advantages', 'sections.master']
     >;
     seo: Schema.Attribute.Component<'shared.seo', false>;
     updatedAt: Schema.Attribute.DateTime;
@@ -716,6 +748,38 @@ export interface ApiPrivacyPolicyPagePrivacyPolicyPage
     seo: Schema.Attribute.Component<'shared.seo', false>;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRequestServiceRequestService
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'request_services';
+  info: {
+    description: '';
+    displayName: 'RequestService';
+    pluralName: 'request-services';
+    singularName: 'request-service';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::request-service.request-service'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1319,6 +1383,7 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
+      'api::calculate-window.calculate-window': ApiCalculateWindowCalculateWindow;
       'api::category.category': ApiCategoryCategory;
       'api::employee.employee': ApiEmployeeEmployee;
       'api::global.global': ApiGlobalGlobal;
@@ -1326,6 +1391,7 @@ declare module '@strapi/strapi' {
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::portfolio-item.portfolio-item': ApiPortfolioItemPortfolioItem;
       'api::privacy-policy-page.privacy-policy-page': ApiPrivacyPolicyPagePrivacyPolicyPage;
+      'api::request-service.request-service': ApiRequestServiceRequestService;
       'api::service-category.service-category': ApiServiceCategoryServiceCategory;
       'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;
