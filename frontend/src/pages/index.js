@@ -8,18 +8,12 @@ import Advantages from "@/components/Advantages";
 import MasterBlock from "@/components/MasterBlock";
 import WindowCalculate from "@/components/WindowCalculate";
 import PortfolioBlock from "@/components/PortfolioBlock";
+import ServecesTable from "@/components/ServicesTable";
 
 const HomePage = () => {
   const { loading, data, error } = useQuery(GET_HOME_PAGE);
 
-  if (loading) return <div>Загрузка...</div>
-  if (error) return (
-    <Alert severity='error' sx={{
-      mt: 2
-    }}>
-      <AlertTitle>Ошибка</AlertTitle>
-      {error.message}
-    </Alert>)
+  console.log(data)
 
   return (
     <>
@@ -50,10 +44,13 @@ const HomePage = () => {
         </Container>
       </Box>
       <Box>
-        <WindowCalculate calculateBlock={data?.calculateWindow} />
+        <WindowCalculate loading={loading} calculateBlock={data?.calculateWindow} />
       </Box>
       <Container>
-        <PortfolioBlock />
+        <PortfolioBlock loading={loading} data={data?.portfolioItems} />
+      </Container>
+      <Container>
+        <ServecesTable />
       </Container>
     </>
   )

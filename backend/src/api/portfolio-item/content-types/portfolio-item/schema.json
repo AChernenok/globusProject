@@ -4,7 +4,8 @@
   "info": {
     "singularName": "portfolio-item",
     "pluralName": "portfolio-items",
-    "displayName": "Portfolio-item"
+    "displayName": "Portfolio-item",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,11 +15,12 @@
       "type": "string"
     },
     "minImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "services": {
       "type": "relation",
@@ -29,18 +31,16 @@
     "address": {
       "type": "string"
     },
-    "gallery": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": true
-    },
     "workDescription": {
-      "type": "richtext"
+      "type": "customField",
+      "options": {
+        "preset": "defaultMarkdown"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

@@ -21,9 +21,6 @@ import LinkWrapper from './LinkWrapper';
 const Footer = () => {
     const { loading, data, error } = useQuery(GET_FOOTER)
 
-    const theme = useTheme();
-    console.log(theme.palette); // Все цвета темы
-
     if (loading) return (
         <Box
             component='footer'

@@ -96,6 +96,7 @@ query HomePage{
     popular
     service_category {
       title
+      slug
     } 
   }
   calculateWindow {
@@ -113,6 +114,20 @@ query HomePage{
       name
       id
     }
+  }
+  portfolioItems {
+    title
+    workDescription
+    address
+    slug
+    services {
+      title
+    }
+    minImage {
+      url
+      formats
+    }
+    documentId
   }
 }
 `
@@ -156,23 +171,84 @@ query Footer{
 }
 `
 
-export const GET_PORTFOLIO = gql`
-query PortfolioItems {
-  portfolioItems {
+export const GET_SERVICES_TABLE = gql`
+query ServicesPrice{
+  serviceCategories {
     title
-    workDescription
+    slug
     services {
       title
+      slug
+      price
     }
+  }
+}
+`
+
+export const GET_SERVICE_PAGE = gql`
+query ServicePage {
+  servicePage {
+    title
+    description
+    service_categories {
+      title
+      slug
+      description
+      services {
+        title
+        slug
+        image {
+          url
+          formats
+        }
+        price
+      }
+        image {
+        url
+        formats
+      }
+    }
+  }
+}
+`
+
+export const GET_SERVICE_CATEGORY = gql`
+query ServiceCategory($slug: String!) {
+  serviceCategories(filters: { slug: { eq: $slug } }) {
+    title
+    slug
+    description
+    services {
+      title
+      slug
+      price
+    }
+  }
+  calculateWindow {
+    title
+    windowTypes {
+      openings
+      name
+      image {
+        url
+      }
+      id
+    }
+    repairType {
+      price
+      name
+      id
+    }
+  }
+  portfolioItems {
     documentId
+    title
+    slug
+    address
     minImage {
       url
-      formats
     }
-    gallery {
-      url
-      formats
-    }
+    workDescription
   }
 }
 `

@@ -10,7 +10,7 @@ const PopularServiceBlock = ({ services }) => {
             <Grid container spacing={2} sx={{ mt: 2, alignItems: 'stretch' }}>
                 {services?.map((service) => (
                     <Grid key={service.slug} size={{ xs: 6, sm: 3, md: 2 }}>
-                        <LinkWrapper href={`/ulsugi/${service?.slug}`}>
+                        <LinkWrapper href={`/uslugi/${service?.service_category?.slug}`}>
                             <Card
                                 sx={{
                                     height: '100%',

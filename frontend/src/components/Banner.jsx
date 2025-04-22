@@ -50,8 +50,6 @@ const Banner = ({ src, loading, error }) => {
         </Container>
     </Box>)
 
-    console.log(src?.animatedText)
-
     const iconMap = {
         HelpOutline,
         VerifiedUser,

@@ -11,7 +11,8 @@ import {
     TextField,
     Typography,
     Link,
-    styled
+    styled,
+    Skeleton
 } from '@mui/material'
 import CallBackModal from "./CallbackModal";
 
@@ -26,7 +27,7 @@ const CalculatorForm = styled(Paper)(({ theme }) => ({
     marginTop: theme.spacing(2),
 }));
 
-const WindowCalculate = ({ calculateBlock }) => {
+const WindowCalculate = ({ calculateBlock, loading }) => {
 
     const [repairTypes, setRepairTypes] = useState([]);
     const [windowMeasurements, setWindowMeasurements] = useState({});
@@ -35,6 +36,12 @@ const WindowCalculate = ({ calculateBlock }) => {
     const [distance, setDistance] = useState('');
     const [agree, setAgree] = useState(false);
     const [openModal, setOpenModal] = useState(false)
+
+    if (loading) return (
+        <Box>
+            <Skeleton variant='rectangular' height={'7rem'} width={'100%'} />
+        </Box>
+    )
 
 
     // Обработчики
@@ -121,7 +128,7 @@ const WindowCalculate = ({ calculateBlock }) => {
             />
             <Container maxWidth="lg">
                 <Typography variant="h4" component="h2" gutterBottom>
-                    {calculateBlock.title}
+                    {calculateBlock?.title}
                 </Typography>
 
                 <CalculatorForm component="form">

@@ -34,6 +34,9 @@
       "relation": "oneToMany",
       "target": "api::service.service",
       "mappedBy": "service_category"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

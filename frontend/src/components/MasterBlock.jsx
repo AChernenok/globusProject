@@ -16,7 +16,6 @@ const MasterBlock = ({ master }) => {
         Check,
         TaskAlt
     }
-    console.log(master)
     return (
         <Box sx={{
             py: 3

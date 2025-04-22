@@ -688,6 +688,7 @@ export interface ApiPortfolioItemPortfolioItem
   extends Struct.CollectionTypeSchema {
   collectionName: 'portfolio_items';
   info: {
+    description: '';
     displayName: 'Portfolio-item';
     pluralName: 'portfolio-items';
     singularName: 'portfolio-item';
@@ -700,10 +701,6 @@ export interface ApiPortfolioItemPortfolioItem
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    gallery: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -713,11 +710,18 @@ export interface ApiPortfolioItemPortfolioItem
     minImage: Schema.Attribute.Media<'images'>;
     publishedAt: Schema.Attribute.DateTime;
     services: Schema.Attribute.Relation<'manyToMany', 'api::service.service'>;
+    slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    workDescription: Schema.Attribute.RichText;
+    workDescription: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultMarkdown';
+        }
+      >;
   };
 }
 
@@ -802,6 +806,7 @@ export interface ApiServiceCategoryServiceCategory
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
     image: Schema.Attribute.Media<'images'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -813,6 +818,39 @@ export interface ApiServiceCategoryServiceCategory
     publishedAt: Schema.Attribute.DateTime;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiServicePageServicePage extends Struct.SingleTypeSchema {
+  collectionName: 'service_pages';
+  info: {
+    displayName: 'ServicePage';
+    pluralName: 'service-pages';
+    singularName: 'service-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service-page.service-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    service_categories: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service-category.service-category'
+    >;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1393,6 +1431,7 @@ declare module '@strapi/strapi' {
       'api::privacy-policy-page.privacy-policy-page': ApiPrivacyPolicyPagePrivacyPolicyPage;
       'api::request-service.request-service': ApiRequestServiceRequestService;
       'api::service-category.service-category': ApiServiceCategoryServiceCategory;
+      'api::service-page.service-page': ApiServicePageServicePage;
       'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
