@@ -9,10 +9,10 @@ const CallbackBlock = () => {
                 p: 2
             }}>
                 <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, md: 3 }}>
+                    <Grid size={{ xs: 12, sm: 4, md: 3 }}>
                         <Typography variant='h4'>Напиши нам</Typography>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 9 }}>
+                    <Grid size={{ xs: 12, sm: 8, md: 9 }}>
                         <Typography variant='body1' sx={{ mb: 2 }}>В WhatsApp или Telegram чтобы обсудить цену с мастером</Typography>
                         <ButtonGroup variant='outlined' fullWidth size='medium'>
                             <Button

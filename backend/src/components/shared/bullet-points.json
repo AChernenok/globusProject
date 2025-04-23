@@ -21,6 +21,9 @@
         "Alarm",
         "ShowChart"
       ]
+    },
+    "description": {
+      "type": "string"
     }
   }
 }

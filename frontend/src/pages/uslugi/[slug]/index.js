@@ -21,6 +21,8 @@ import { useRouter } from "next/router"
 import CallbackBlockSmall from "@/components/CallbackBlockSmall"
 import WindowCalculate from "@/components/WindowCalculate"
 import PortfolioBlock from "@/components/PortfolioBlock"
+import DiscountsBlock from "@/components/DiscountsBlock"
+import Breadcrumb from "@/components/Breadcrumb"
 
 const CategoryPage = () => {
     const router = useRouter()
@@ -45,34 +47,13 @@ const CategoryPage = () => {
     )
 
     const category = data?.serviceCategories[0]
-
-    console.log(data)
+    console.log(category.services.find(service => service.price >= 0))
     return (
         <Box>
 
             <Container sx={{ py: 2 }}>
                 <Typography variant='h1' fontSize={'3rem'}>{category?.title}</Typography>
-                <Stack spacing={2} sx={{ py: 2 }}>
-                    <Breadcrumbs separator={<NavigateNext />} aria-label="Главная">
-                        <LinkWrapper href='/'>
-                            <Typography
-                                sx={{
-                                    color: 'primary.main'
-                                }}>
-                                Главная
-                            </Typography>
-                        </LinkWrapper>
-                        <LinkWrapper href='/uslugi'>
-                            <Typography
-                                sx={{
-                                    color: 'primary.main'
-                                }}>
-                                Услуги
-                            </Typography>
-                        </LinkWrapper>
-                        <Typography sx={{ color: 'text.primary' }}>{category?.title}</Typography>
-                    </Breadcrumbs>
-                </Stack>
+                <Breadcrumb currentPage={category?.title} slug={router.pathname.split('/')[1]} />
                 <Grid container spacing={2} sx={{ justifyContent: 'space-between' }}>
                     <Grid size={{ xs: 12, sm: 5 }}>
                         <Typography variant='body1'>{category?.description}</Typography>
@@ -82,16 +63,42 @@ const CategoryPage = () => {
                     </Grid>
                 </Grid>
             </Container>
-            <Box sx={{ bgcolor: 'grey.50', py: 2 }}>
+            <Box sx={{
+                bgcolor: 'grey.50',
+                py: 2,
+                display: category.services.find(service => service.price >= 0) ? 'block' : 'none'
+            }}>
                 <Container>
-                    <Typography variant='h2' sx={{ fontSize: '2rem' }}>Стоимость услуг</Typography>
+                    <Typography variant='h2'>Стоимость услуг</Typography>
                     <TableContainer>
                         <Table sx={{ width: '100%' }}>
                             <TableBody>
                                 {category?.services.map((service) => (
                                     <TableRow key={service?.slug}>
                                         <TableCell component='th' scope='row'>{service?.title}</TableCell>
-                                        <TableCell component='th' scope='row' sx={{ color: 'red', fontWeight: 700, textAlign: 'end' }}>от {service?.price}₽</TableCell>
+                                        <TableCell
+                                            component='th'
+                                            scope='row'
+                                            sx={{
+                                                fontWeight: 700,
+                                                textAlign: 'end'
+                                            }}>
+                                            {service?.discount
+                                                ? (
+                                                    <Box component="span">
+                                                        <Box component="span" sx={{ textDecoration: 'line-through', opacity: 0.7, mr: 1 }}>
+                                                            от {service?.price}₽
+                                                        </Box>
+                                                        <Box component="span" sx={{ color: 'error.main', fontWeight: 700 }}>
+                                                            от {Math.round(service?.price - (service?.price * (service.discountAmount / 100)))}₽
+                                                        </Box>
+                                                    </Box>
+                                                ) : (
+                                                    <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                                                        от {service?.price}₽
+                                                    </Box>
+                                                )}
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -99,6 +106,7 @@ const CategoryPage = () => {
                     </TableContainer>
                 </Container>
             </Box>
+            <DiscountsBlock />
             <WindowCalculate calculateBlock={data?.calculateWindow} loading={loading} />
             <Container>
                 <PortfolioBlock data={data?.portfolioItems} loading={loading} />

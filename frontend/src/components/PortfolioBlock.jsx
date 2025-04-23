@@ -67,24 +67,15 @@ const PortfolioBlock = ({ loading, data }) => {
 
     return (
         <Box sx={{ py: 2 }}>
-            <Typography variant='h2' fontSize={'2.125rem'} sx={{ mb: 2 }}>Портфолио</Typography>
+            <Typography variant='h2' sx={{ mb: 2 }}>Портфолио</Typography>
             <Grid container spacing={2}>
                 {data?.map((portfolio) => (
-                    <Grid key={portfolio.documentId} size={{ xs: 12, md: 4 }}>
+                    <Grid key={portfolio.documentId} size={{ xs: 12, sm: 6, md: 4 }}>
                         <Paper elevation={2}>
                             <Card>
                                 <CardHeader
                                     title={portfolio.title}
                                     subheader={portfolio.address}
-                                    sx={{
-                                        '& .MuiCardHeader-title': {
-                                            fontSize: '1.2rem',
-                                            fontWeight: 600
-                                        },
-                                        '& .MuiCardHeader-subtitle': {
-                                            fontSize: '.7rem'
-                                        }
-                                    }}
                                 />
                                 <CardMedia
                                     component='img'

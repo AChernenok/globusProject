@@ -22,11 +22,10 @@
     "descriptionBlock": {
       "type": "string"
     },
-    "textButton": {
-      "type": "string"
-    },
-    "linkButton": {
-      "type": "string"
+    "buttonsGroup": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.buttons-group"
     }
   }
 }

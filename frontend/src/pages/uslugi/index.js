@@ -36,7 +36,6 @@ const Services = () => {
             <Alert variant='standard' severity='error'>{error?.message}</Alert>
         </Container>
     )
-    console.log('Data:', data)
     console.log('Colors:', theme.palette)
     return (
         <Container sx={{ mt: 2 }}>
@@ -83,7 +82,29 @@ const Services = () => {
                                             {category?.services?.slice(0, 3).map((service) => (
                                                 <TableRow key={service?.slug}>
                                                     <TableCell component='th' scope='row'>{service?.title}</TableCell>
-                                                    <TableCell component='th' scope='row' sx={{ color: 'red', fontWeight: 700 }}>от {service?.price}₽</TableCell>
+                                                    <TableCell
+                                                        component='th'
+                                                        scope='row'
+                                                        sx={{
+                                                            fontWeight: 700,
+                                                            textAlign: 'end'
+                                                        }}>
+                                                        {service?.discount
+                                                            ? (
+                                                                <Box component="span">
+                                                                    <Box component="span" sx={{ textDecoration: 'line-through', opacity: 0.7, mr: 1 }}>
+                                                                        от {service?.price}₽
+                                                                    </Box>
+                                                                    <Box component="span" sx={{ color: 'error.main', fontWeight: 700 }}>
+                                                                        от {Math.round(service?.price - (service?.price * (service.discountAmount / 100)))}₽
+                                                                    </Box>
+                                                                </Box>
+                                                            ) : (
+                                                                <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                                                                    от {service?.price}₽
+                                                                </Box>
+                                                            )}
+                                                    </TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

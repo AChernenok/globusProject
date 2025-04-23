@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_buttons_groups",
+  "info": {
+    "displayName": "ButtonsGroup",
+    "icon": "dashboard"
+  },
+  "options": {},
+  "attributes": {
+    "buttonText": {
+      "type": "string"
+    },
+    "buttonLink": {
+      "type": "string"
+    }
+  }
+}

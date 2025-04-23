@@ -1,0 +1,45 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_pages",
+  "info": {
+    "singularName": "about-page",
+    "pluralName": "about-pages",
+    "displayName": "AboutPage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultMarkdown"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "workTypesBtB": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.bullet-points"
+    },
+    "workTypesBtC": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.bullet-points"
+    },
+    "textBtB": {
+      "type": "string"
+    },
+    "textBtC": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    }
+  }
+}

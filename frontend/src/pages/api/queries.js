@@ -80,8 +80,10 @@ query HomePage{
         }
         titleBlock
         descriptionBlock
-        textButton
-        linkButton
+        buttonsGroup {
+          buttonText
+          buttonLink
+        }
       }
     }
   }
@@ -202,6 +204,8 @@ query ServicePage {
           formats
         }
         price
+        discount
+        discountAmount
       }
         image {
         url
@@ -222,6 +226,8 @@ query ServiceCategory($slug: String!) {
       title
       slug
       price
+      discount
+      discountAmount
     }
   }
   calculateWindow {
@@ -249,6 +255,62 @@ query ServiceCategory($slug: String!) {
       url
     }
     workDescription
+  }
+}
+`
+
+export const GET_DISCOUNTS = gql`
+query Discounts {
+  discounts {
+    title
+    shortDescription
+    documentId
+    discountAmount
+    active
+    image {
+      url
+      formats
+    }
+  }
+}
+`
+
+export const GET_ABOUT_PAGE = gql`
+query AboutPage {
+  aboutPage {
+    documentId
+    title
+    description
+    textBtB
+    textBtC
+    workTypesBtC {
+      id
+      text
+      description
+    }
+    workTypesBtB {
+      id
+      text
+      description
+    }
+    slug
+  }
+}
+`
+
+export const GET_PORTFOLIO_ITEMS = gql`
+query PortfolioItems {
+  portfolioItems {
+    title
+    workDescription
+    services {
+      title
+    }
+    documentId
+    minImage {
+      url
+      formats
+    }
   }
 }
 `

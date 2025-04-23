@@ -40,3 +40,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.MuiTypography-h1 {
+  font-size: '3rem';
+}

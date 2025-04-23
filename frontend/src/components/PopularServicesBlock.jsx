@@ -2,6 +2,7 @@ import { Typography, Box, Grid, Card, CardActionArea, CardMedia, CardContent, Ba
 import LinkWrapper from "./LinkWrapper"
 
 const PopularServiceBlock = ({ services }) => {
+
     return (
         <Box sx={{
             py: 3
@@ -42,14 +43,13 @@ const PopularServiceBlock = ({ services }) => {
                                     />
                                     <CardContent
                                         sx={{
-                                            pt: 0,
                                             flexGrow: 1,
                                             display: 'flex',
                                             flexDirection: 'column',
                                         }}
                                     >
                                         <Box sx={{ flexGrow: 1 }}>
-                                            <Typography gutterBottom variant="h6">
+                                            <Typography gutterBottom variant="h4">
                                                 {service?.title}
                                             </Typography>
                                             <Typography variant="caption">{service?.service_category?.title}</Typography>

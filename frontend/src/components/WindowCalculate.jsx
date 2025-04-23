@@ -18,7 +18,7 @@ import CallBackModal from "./CallbackModal";
 
 // Стилизованные компоненты
 const GreyBgSection = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: theme.palette.grey[50],
     padding: theme.spacing(4, 0),
 }));
 
@@ -127,14 +127,14 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
                 resetForm={resetForm}
             />
             <Container maxWidth="lg">
-                <Typography variant="h4" component="h2" gutterBottom>
+                <Typography variant="h2" gutterBottom>
                     {calculateBlock?.title}
                 </Typography>
 
                 <CalculatorForm component="form">
                     {/* Тип ремонта */}
                     <Box mb={4}>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h4" gutterBottom>
                             Какой вид ремонта нужен окну?
                         </Typography>
                         <Grid container spacing={2}>
@@ -156,12 +156,12 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
 
                     {/* Выбор окна */}
                     <Box mb={4}>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h4" gutterBottom>
                             Выберите вид окна и укажите его параметры
                         </Typography>
                         <Grid container spacing={2}>
                             {calculateBlock?.windowTypes.map((windowType) => (
-                                <Grid key={windowType.id} size={{ xs: 12, md: 2 }}>
+                                <Grid key={windowType.id} size={{ xs: 12, sm: 4, md: 2 }}>
                                     <Paper
                                         elevation={2}
                                         sx={{
@@ -258,7 +258,7 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
 
                     {/* Место ремонта */}
                     <Box sx={{ mb: 4 }}>
-                        <Typography variant="h6" gutterBottom>
+                        <Typography variant="h4" gutterBottom>
                             Ремонт осуществляется
                         </Typography>
                         <Grid container spacing={2}>
@@ -307,7 +307,7 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
                                     label={
                                         <Typography>
                                             Согласие c {' '}
-                                            <Link href="#" color="primary">
+                                            <Link href="/politika-konfidenczialnosti" color="primary">
                                                 политикой конфиденциальности
                                             </Link>
                                         </Typography>

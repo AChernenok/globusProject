@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "discounts",
+  "info": {
+    "singularName": "discount",
+    "pluralName": "discounts",
+    "displayName": "Discount",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "discountAmount": {
+      "type": "integer"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "shortDescription": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultMarkdown",
+        "maxLengthWords": null,
+        "maxLengthCharacters": 500
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    }
+  }
+}

@@ -4,4 +4,4 @@ const PrivacyPolicy = () => {
     return (<>Политика конфиденциальности</>)
 }
 
-return PrivacyPolicy
+export default PrivacyPolicy

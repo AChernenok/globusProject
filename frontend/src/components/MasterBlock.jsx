@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Typography } from "@mui/material"
+import { Box, Button, ButtonGroup, Paper, Typography } from "@mui/material"
 import { Grid } from "@mui/system"
 import {
     CheckCircleOutline,
@@ -6,7 +6,9 @@ import {
     Check,
     TaskAlt,
     WhatsApp,
-    HelpOutline
+    HelpOutline,
+    Telegram,
+    Send
 } from '@mui/icons-material'
 
 const MasterBlock = ({ master }) => {
@@ -16,6 +18,8 @@ const MasterBlock = ({ master }) => {
         Check,
         TaskAlt
     }
+
+    console.log(master?.buttonsGroup?.map((button) => button.buttonLink.includes('wa.me')))
     return (
         <Box sx={{
             py: 3
@@ -23,7 +27,6 @@ const MasterBlock = ({ master }) => {
             <Typography variant='h2'
                 sx={{
                     pb: 2,
-                    fontSize: '2.25rem'
                 }}
             >{master?.title}</Typography>
 
@@ -31,15 +34,15 @@ const MasterBlock = ({ master }) => {
                 p: 2
             }}>
                 <Grid container spacing={3}>
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         {master?.items?.map((item) => {
                             const Icon = IconMap[item.icon]
                             return (
-                                <Grid container spacing={0} sx={{ my: 1 }} key={item.id}>
-                                    <Grid size={{ xs: 1 }} sx={{ textAlign: 'center' }}>
+                                <Grid container spacing={1} sx={{ my: 1 }} key={item.id}>
+                                    <Grid size={{ xs: 3, md: 1 }} sx={{ textAlign: 'center' }}>
                                         {Icon ? <Icon sx={{ fontSize: '2rem', color: 'error.dark' }} /> : <HelpOutline />}
                                     </Grid>
-                                    <Grid size={{ xs: 11 }} sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Grid size={{ xs: 9, md: 11 }} sx={{ display: 'flex', alignItems: 'center' }}>
                                         <Typography variant='body1' fontWeight={600}>
                                             {item.description}
                                         </Typography>
@@ -48,7 +51,7 @@ const MasterBlock = ({ master }) => {
                             )
                         })}
                     </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}
+                    <Grid size={{ xs: 12, sm: 6 }}
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -57,17 +60,36 @@ const MasterBlock = ({ master }) => {
                             alignItems: 'flex-start'
                         }}
                     >
-                        <Typography variant='h5'>{master?.titleBlock}</Typography>
-                        <Typography variant='h6'>{master?.descriptionBlock}</Typography>
-                        <Button
-                            variant='outlined'
-                            color='success'
-                            href={master?.linkButton}
-                            size='medium'
-                            startIcon={<WhatsApp />}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                        >{master?.textButton}</Button>
+                        <Typography variant='h3'>{master?.titleBlock}</Typography>
+                        <Typography variant='h4' sx={{ my: { xs: 2 } }}>{master?.descriptionBlock}</Typography>
+                        <ButtonGroup
+                            orientation='vertical'
+                            fullWidth
+                        >
+                            {master?.buttonsGroup?.map((button) => (
+                                <Button
+                                    key={button?.buttonLink}
+                                    variant='outlined'
+                                    color={
+                                        button?.buttonLink.includes('wa.me')
+                                            ? 'success'
+                                            : button?.buttonLink.includes('t.me')
+                                                ? 'info'
+                                                : 'primary'
+                                    }
+                                    href={button?.buttonLink}
+                                    size='medium'
+                                    startIcon={
+                                        button?.buttonLink.includes('wa.me')
+                                            ? <WhatsApp />
+                                            : button?.buttonLink.includes('t.me')
+                                                ? <Telegram />
+                                                : <Send />}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >{button?.buttonText}</Button>
+                            ))}
+                        </ButtonGroup>
                     </Grid>
                 </Grid>
             </Paper>

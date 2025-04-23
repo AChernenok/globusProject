@@ -152,6 +152,7 @@ const Header = () => {
                                     display: 'flex',
                                     alignItems: 'center',
                                     mr: 4,
+                                    justifyContent: 'space-around',
                                     textDecoration: 'none',
                                     '&:hover': {
                                         cursor: 'pointer'
@@ -168,7 +169,7 @@ const Header = () => {
                                     }}
                                 />
                                 <Typography
-                                    variant="h6"
+                                    variant="h5"
                                     component="div"
                                     sx={{
                                         fontWeight: 700,
@@ -207,69 +208,54 @@ const Header = () => {
                                             anchorEl={anchorEl}
                                             open={open}
                                             onClose={handleHeaderServicesClose}
-                                            PaperProps={{
-                                                sx: {
-                                                    width: '100%',
-                                                    maxWidth: '800px',
-                                                    borderRadius: '8px',
-                                                    mt: 1,
-                                                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
-                                                    '& .MuiPaper-root': {
-                                                        overflow: 'hidden !important',
-                                                        pr: 0
+                                            slotProps={{
+                                                paper: {
+                                                    sx: {
+                                                        width: '100%',
+                                                        maxWidth: '500px',
+                                                        borderRadius: '8px',
+                                                        mt: 1,
+                                                        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
+                                                        '& .MuiPaper-root': {
+                                                            overflow: 'hidden !important',
+                                                            pr: 0
+                                                        },
+                                                        '& .MuiMenu-list': {
+                                                            py: 0
+                                                        },
                                                     }
                                                 }
                                             }}>
-                                            <Paper sx={{ display: 'flex', width: '100%' }}>
-                                                <Tabs
-                                                    value={tabValue}
-                                                    orientation='vertical'
-                                                    variant='scrollable'
-                                                    onChange={handleTabChange}
-                                                    sx={{
-                                                        borderBottom: 1,
-                                                        borderColor: 'divider',
-                                                        minWidth: 200
-                                                    }}>
-
-                                                    {data?.serviceCategories.map((item) => (
-                                                        <Tab
-                                                            key={item.documentId}
-                                                            label={item.title}
+                                            <Paper sx={{
+                                                display: 'flex',
+                                                width: '100%',
+                                                flexDirection: 'column'
+                                            }}>
+                                                {data?.serviceCategories?.map((category) => (
+                                                    <LinkWrapper
+                                                        key={category?.documentId}
+                                                        href={'/uslugi/' + category?.slug}>
+                                                        <MenuItem
+                                                            onClick={handleHeaderServicesClose}
                                                             sx={{
-                                                                alignItems: 'flex-start'
-                                                            }}
-                                                        />
-                                                    ))}
-                                                </Tabs>
-                                                <Box sx={{
-                                                    flex: 1,
-                                                    p: 2,
-                                                    overflow: 'auto',
-                                                    maxHeight: '65vh'
-                                                }}>
-                                                    {data?.serviceCategories?.[tabValue]?.services?.map((service) => (
-                                                        <LinkWrapper
-                                                            key={service.documentId}
-                                                            href={'/uslugi/' + service.slug}>
-                                                            <MenuItem
-                                                                onClick={handleHeaderServicesClose}
-                                                                sx={{
-                                                                    px: 2,
-                                                                    py: 1.5,
-                                                                    borderRadius: 1,
-                                                                    '&:hover': {
-                                                                        bgcolor: 'action.hover'
-                                                                    }
-                                                                }}>
-                                                                <ListItemText
-                                                                    primary={service.title}
-                                                                    primaryTypographyProps={{ fontWeight: 500 }} />
-                                                                <ChevronRightIcon color='action' />
-                                                            </MenuItem>
-                                                        </LinkWrapper>
-                                                    ))}
-                                                </Box>
+                                                                px: 2,
+                                                                py: 1.5,
+                                                                borderRadius: 1,
+                                                                '&:hover': {
+                                                                    bgcolor: 'action.hover'
+                                                                }
+                                                            }}>
+                                                            <ListItemText
+                                                                primary={
+                                                                    category?.title.length >= 48
+                                                                        ? category?.title.substring(0, 46) + '...'
+                                                                        : category?.title
+                                                                }
+                                                                primaryTypographyProps={{ fontWeight: 500 }} />
+                                                            <ChevronRightIcon color='action' />
+                                                        </MenuItem>
+                                                    </LinkWrapper>
+                                                ))}
                                             </Paper>
                                         </Menu>
                                     </Box>
@@ -368,7 +354,7 @@ const Header = () => {
                                 mr: 1
                             }} />
                             <Box textAlign='right'>
-                                <Typography fontWeight='bold' variant='h6'>
+                                <Typography fontWeight='bold' variant='h4'>
                                     {schedule.timeRange}
                                 </Typography>
                                 <Typography variant='caption'>
@@ -501,7 +487,7 @@ const Header = () => {
                                         px: 3,
                                         justifyContent: 'flex-start',
                                         color: 'text.primary',
-                                        '&:hover': {
+                                        '& :hover': {
                                             color: 'primary.main',
                                             backgroundColor: 'action.hover'
                                         }

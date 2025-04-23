@@ -13,7 +13,7 @@ const Banner = ({ src, loading, error }) => {
         <Box sx={{ py: 6 }}>
             <Container>
 
-                <Skeleton height='2rem' width={'30%'} />
+                <Skeleton height='4rem' width={'70%'} />
                 <Skeleton height='2rem' width={'20%'} />
                 <Box sx={{
                     '& .MuiSkeleton-root': {
@@ -80,7 +80,8 @@ const Banner = ({ src, loading, error }) => {
                                 variant="h1"
                                 sx={{
                                     fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem', lg: '6rem' },
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold',
+                                    lineHeight: { xs: '2.3rem', sm: '2.7rem', md: '3.3rem', lg: '5.5rem' }
                                 }}
                             >
                                 {src?.title}
@@ -101,9 +102,7 @@ const Banner = ({ src, loading, error }) => {
                     </Grid>
                     <Grid container spacing={2} sx={{ mb: 2 }}>
                         <Grid size={{ xs: 12, md: 7 }}>
-                            <Typography variant='subtitle1' sx={{
-                                fontSize: { xs: '1rem', md: '2rem' }
-                            }}>
+                            <Typography variant='h3'>
                                 <TypeAnimation
                                     sequence={src?.animatedText}
                                     speed={70}
@@ -118,7 +117,7 @@ const Banner = ({ src, loading, error }) => {
                         {src?.bulletPoints?.map((item) => {
                             const Icon = iconMap[item.icon]
                             return (
-                                <Grid size={{ xs: 12, md: 3 }} key={item.id}>
+                                <Grid size={{ xs: 12, sm: 4, md: 3 }} key={item.id}>
                                     <Paper elevation={2} sx={{
                                         display: 'flex',
                                         minHeight: '4rem',

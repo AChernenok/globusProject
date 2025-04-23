@@ -22,7 +22,7 @@ const ServecesTable = () => {
     return (
         <Grid container spacing={1} sx={{ py: 2 }}>
             <Grid size={{ xs: 12 }} sx={{ mb: 2 }}>
-                <Typography variant='h2' fontSize={'2.125rem'}>Стоимость услуг</Typography>
+                <Typography variant='h2'>Стоимость услуг</Typography>
             </Grid>
             <Grid size={{ xs: 5, md: 3 }}>
                 <Tabs
