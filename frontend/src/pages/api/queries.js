@@ -299,17 +299,49 @@ query AboutPage {
 `
 
 export const GET_PORTFOLIO_ITEMS = gql`
-query PortfolioItems {
-  portfolioItems {
+query PortfolioPage {
+  portfolioPage {
     title
-    workDescription
-    services {
+    description
+    portfolio_items {
       title
+      slug
+      minImage {
+        url
+        formats
+      }
+      documentId
+      address
+      services {
+        title
+        slug
+        documentId
+        service_category {
+          documentId
+          slug
+        }
+      }
+        workDescription
     }
-    documentId
-    minImage {
-      url
-      formats
+  }
+}
+`
+
+export const GET_CONTACT_PAGE = gql`
+query ContactPage {
+  contactPage {
+    title
+    description
+    phone
+    email
+    address
+    dataIP
+    schedule
+    yandexMapsUrl
+    additionalBlock {
+      title
+      id
+      description
     }
   }
 }

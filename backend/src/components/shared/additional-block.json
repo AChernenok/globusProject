@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_additional_blocks",
+  "info": {
+    "displayName": "additionalBlock",
+    "icon": "cast"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultMarkdown"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    }
+  }
+}

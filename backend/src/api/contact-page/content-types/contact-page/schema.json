@@ -1,0 +1,49 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_pages",
+  "info": {
+    "singularName": "contact-page",
+    "pluralName": "contact-pages",
+    "displayName": "ContactPage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultMarkdown"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "schedule": {
+      "type": "string"
+    },
+    "dataIP": {
+      "type": "text"
+    },
+    "additionalBlock": {
+      "displayName": "additionalBlock",
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.additional-block"
+    },
+    "yandexMapsUrl": {
+      "type": "string"
+    }
+  }
+}

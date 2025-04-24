@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_phone_groups",
+  "info": {
+    "displayName": "phoneGroup",
+    "icon": "cursor"
+  },
+  "options": {},
+  "attributes": {
+    "phoneNumber": {
+      "type": "string"
+    },
+    "phoneCaption": {
+      "type": "string"
+    }
+  }
+}

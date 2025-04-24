@@ -16,6 +16,7 @@ import ReactMarkdown from 'react-markdown'
 import { ExpandMore as ExpandMoreIcon, InsertLink as InsertLinkIcon } from '@mui/icons-material'
 import { useState } from 'react'
 import { styled } from '@mui/material/styles'
+import LinkWrapper from './LinkWrapper'
 
 const PortfolioBlock = ({ loading, data }) => {
     const [expandedId, setExpandedId] = useState(null);
@@ -84,12 +85,14 @@ const PortfolioBlock = ({ loading, data }) => {
                                     image={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + portfolio?.minImage?.url}
                                     alt={portfolio.title} />
                                 <CardActions disableSpacing>
-                                    <IconButton
-                                        aria-label={portfolio?.title}
-                                        href={`/portfolio/${portfolio?.slug}`}
-                                    >
-                                        <InsertLinkIcon color='action.active' />
-                                    </IconButton>
+                                    <LinkWrapper
+                                        href={`/portfolio#${portfolio?.slug}`}>
+                                        <IconButton
+                                            aria-label={portfolio?.title}
+                                        >
+                                            <InsertLinkIcon color='action.active' />
+                                        </IconButton>
+                                    </LinkWrapper>
                                     <ExpandMore
                                         expand={expandedId === portfolio?.documentId}
                                         onClick={() => handleExpandClick(portfolio?.documentId)}
