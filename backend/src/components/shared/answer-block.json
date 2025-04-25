@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_answer_blocks",
+  "info": {
+    "displayName": "answerBlock",
+    "icon": "alien"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "customField",
+      "options": {
+        "preset": "defaultMarkdown"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    }
+  }
+}

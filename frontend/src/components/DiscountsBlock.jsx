@@ -26,10 +26,16 @@ const DiscountsBlock = () => {
     console.log(data)
     return (
         <Container sx={{ py: 2 }}>
-            <Typography variant='h2' sx={{ mb: 2}}>Акции</Typography>
+            <Typography variant='h2' sx={{ mb: 2 }}>Акции</Typography>
             <Grid container spacing={2}>
                 {data?.discounts?.map((discount) => (
-                    <Grid key={discount?.documentId} size={{ xs: 6, sm: 4, md: 3 }} sx={{ position: 'relative' }}>
+                    <Grid
+                        key={discount?.documentId}
+                        size={{ xs: 12, sm: 4, md: 3 }}
+                        sx={{
+                            position: 'relative',
+                            mt: { xs: 1 }
+                        }}>
                         <Card sx={{ height: '100%' }}>
                             <CardActionArea sx={{
                                 display: 'flex',
@@ -40,7 +46,9 @@ const DiscountsBlock = () => {
                                 <CardMedia
                                     component='img'
                                     alt={discount?.title}
-                                    src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + discount?.image?.formats?.small?.url} />
+                                    src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + discount?.image?.formats?.small?.url}
+                                    loading='lazy'
+                                    />
                                 <CardContent>
                                     <Typography variant='h4'>{discount?.title}</Typography>
                                     <Typography

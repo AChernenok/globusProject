@@ -55,6 +55,7 @@ const Portfolio = () => {
                                         src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + item?.minImage?.url}
                                         width='100%'
                                         height='auto'
+                                        loading='lazy'
                                     />
                                 </Grid>
                                 <Grid size={{ xs: 12, sm: 8, md: 9 }}>

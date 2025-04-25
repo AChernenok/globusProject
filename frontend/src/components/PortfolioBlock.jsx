@@ -77,13 +77,23 @@ const PortfolioBlock = ({ loading, data }) => {
                                 <CardHeader
                                     title={portfolio.title}
                                     subheader={portfolio.address}
+                                    sx={{
+                                        '& .MuiCardHeader-title': {
+                                            fontSize: '1.2rem',
+                                            lineHeight: '1.4rem',
+                                            fontWeight: 600,
+                                            mb: 1
+                                        }
+                                    }}
                                 />
                                 <CardMedia
                                     component='img'
                                     width='100%'
                                     height='auto'
                                     image={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + portfolio?.minImage?.url}
-                                    alt={portfolio.title} />
+                                    alt={portfolio.title}
+                                    loading='lazy'
+                                />
                                 <CardActions disableSpacing>
                                     <LinkWrapper
                                         href={`/portfolio#${portfolio?.slug}`}>

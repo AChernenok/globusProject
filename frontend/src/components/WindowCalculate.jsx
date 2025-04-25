@@ -183,6 +183,7 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
                                                 <Box component='img'
                                                     src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + windowType?.image?.url}
                                                     alt={windowType.name}
+                                                    loading='lazy'
                                                     sx={{
                                                         maxWidth: '100%',
                                                         height: 'auto',

@@ -113,7 +113,7 @@ const Footer = () => {
                     '& .MuiSvgIcon-root': {
                         width: '40px',
                         height: '40px',
-                        color: 'red'
+                        color: 'error.main'
                     },
                     '& .MuiTypography-root': {
                         display: 'block',
@@ -142,6 +142,7 @@ const Footer = () => {
                                             height: 48,
                                             maxWidth: '100%'
                                         }}
+                                        loading='lazy'
                                     />
                                 </Grid>
                                 <Grid size={{ xs: 5 }}>

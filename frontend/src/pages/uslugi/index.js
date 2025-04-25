@@ -54,6 +54,7 @@ const Services = () => {
                             <Grid size={{ xs: 12, sm: 6 }}>
                                 <Box
                                     component='img'
+                                    loading='lazy'
                                     src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + category?.image?.url}
                                     width={'100%'}
                                     height={'auto'} />

@@ -159,7 +159,8 @@ const Header = () => {
                                     }
                                 }}>
                                 <Box
-                                    component="img"
+                                    component='img'
+                                    loading='lazy'
                                     src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + data?.header?.logo?.url}
                                     alt={data?.header?.logo?.caption}
                                     sx={{
@@ -282,30 +283,6 @@ const Header = () => {
                                 )
                             ))}
                             <Button
-                                variant='text'
-                                color='text.primary'
-                                sx={{
-                                    mx: 1,
-                                    fontWeight: 500,
-                                    fontSize: { xs: '0.8rem', lg: '0.875rem' },
-                                    '&:hover': {
-                                        color: 'primary.main',
-                                    }
-                                }}
-                            >Цены</Button>
-                            <Button
-                                variant='text'
-                                color='text.primary'
-                                sx={{
-                                    mx: 1,
-                                    fontWeight: 500,
-                                    fontSize: { xs: '0.8rem', lg: '0.875rem' },
-                                    '&:hover': {
-                                        color: 'primary.main'
-                                    }
-                                }}
-                            >FAQ</Button>
-                            <Button
                                 variant='contained'
                                 color='info'
                                 onClick={handleCallbackModal}
@@ -337,23 +314,37 @@ const Header = () => {
             <Container sx={{
                 boxShadow: '0 10px 15px -5px rgba(0,0,0,0.3)',
                 py: 2,
-                display: { xs: 'none', md: pathname === '/' && 'block' },
+                display: { xs: 'none', md: 'block' },
                 position: 'relative',
                 zIndex: 2,
             }}>
-                <Grid container spacing={2} alignItems='center'>
-                    <Grid size={{ md: 3 }}>
-                        <Box sx={{
+                <Grid
+                    container
+                    spacing={2}
+                    alignItems='center'
+                    sx={{
+                        '& .MuiSvgIcon-root': {
+                            fontSize: '2.5rem',
+                            color: 'error.main',
+                            mr: 1
+                        },
+                        '& .MuiBox-root': {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center'
-                        }}>
-                            <WeekIcon sx={{
-                                fontSize: '2.5rem',
-                                color: '#f44346',
-                                mr: 1
-                            }} />
-                            <Box textAlign='right'>
+                        },
+                        '& .MuiLink-root': {
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }
+                    }}
+                >
+                    <Grid size={{ md: 3 }}>
+                        <Box>
+                            <WeekIcon />
+                            <Box sx={{
+                                flexDirection: 'column'
+                            }}>
                                 <Typography fontWeight='bold' variant='h4'>
                                     {schedule.timeRange}
                                 </Typography>
@@ -364,21 +355,9 @@ const Header = () => {
                         </Box>
                     </Grid>
                     <Grid size={{ md: 3 }}>
-                        <Box sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <AlternateEmailIcon sx={{
-                                fontSize: '2.5rem',
-                                color: '#f44346',
-                                mr: 1
-                            }} />
-                            <Link href={'mailto:' + data?.header?.email} sx={{
-                                textDecoration: 'none',
-                                display: 'flex',
-                                flexDirection: 'column'
-                            }}>
+                        <Box>
+                            <AlternateEmailIcon />
+                            <Link href={`mailto:${data?.header?.email}`}>
                                 <Typography fontWeight='bold'>
                                     {data?.header?.email}
                                 </Typography>
@@ -389,21 +368,9 @@ const Header = () => {
                         </Box>
                     </Grid>
                     <Grid size={{ md: 3 }}>
-                        <Box sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <PhoneIcon sx={{
-                                fontSize: '2.5rem',
-                                color: '#f44346',
-                                mr: 1
-                            }} />
-                            <Link href={'tel:' + data?.header?.phone} sx={{
-                                textDecoration: 'none',
-                                display: 'flex',
-                                flexDirection: 'column'
-                            }}>
+                        <Box>
+                            <PhoneIcon />
+                            <Link href={`tel:${data?.header?.phone}`}>
                                 <Typography fontWeight='bold'>
                                     {data?.header?.phone}
                                 </Typography>
@@ -414,25 +381,13 @@ const Header = () => {
                         </Box>
                     </Grid>
                     <Grid size={{ md: 3 }}>
-                        <Box sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            <TelegramIcon sx={{
-                                fontSize: '2.5rem',
-                                color: '#f44346',
-                                mr: 1
-                            }} />
+                        <Box>
+                            <TelegramIcon />
                             <Link
                                 href={data?.header?.telegramLink}
                                 target='_blank'
                                 rel='noopener noreferrer'
-                                sx={{
-                                    textDecoration: 'none',
-                                    display: 'flex',
-                                    flexDirection: 'column'
-                                }}>
+                            >
                                 <Typography fontSize={'1.2rem'} fontWeight='bold'>
                                     TELEGRAM
                                 </Typography>

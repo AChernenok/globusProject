@@ -31,7 +31,8 @@ const PopularServiceBlock = ({ services }) => {
                                     }}
                                 >
                                     <CardMedia
-                                        component="img"
+                                        component='img'
+                                        loading='lazy'
                                         image={`${process.env.NEXT_PUBLIC_STRAPI_BASE_URL}${service?.image?.formats?.thumbnail?.url}`}
                                         alt={service?.title}
                                         sx={{

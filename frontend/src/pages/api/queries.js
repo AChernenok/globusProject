@@ -337,11 +337,28 @@ query ContactPage {
     address
     dataIP
     schedule
-    yandexMapsUrl
     additionalBlock {
       title
       id
       description
+    }
+  }
+}
+`
+
+export const GET_FAQ_PAGE = gql`
+query FaqPage {
+  faqPage {
+    title
+    description
+    mainBlock {
+      id
+      title
+      answers {
+        id
+        title
+        answer
+      }
     }
   }
 }
