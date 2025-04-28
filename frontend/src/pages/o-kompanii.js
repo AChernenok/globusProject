@@ -5,6 +5,8 @@ import Markdown from "react-markdown"
 import Breadcrumb from "@/components/Breadcrumb"
 import DiscountsBlock from "@/components/DiscountsBlock"
 import CallbackBlock from "@/components/CallbackBlock"
+import EmployeeBlock from "@/components/EmployeeBlock"
+import Seo from "@/components/Seo"
 
 const About = () => {
     const { loading, data, error } = useQuery(GET_ABOUT_PAGE)
@@ -39,6 +41,7 @@ const About = () => {
 
     return (
         <Box>
+            <Seo seo={data?.aboutPage?.seo} />
             <Container sx={{ py: 2 }}>
                 <Typography variant='h1'>{data?.aboutPage?.title}</Typography>
                 <Breadcrumb currentPage={data?.aboutPage?.title} />
@@ -132,6 +135,9 @@ const About = () => {
                 <DiscountsBlock />
             </Box>
             <Container sx={{ py: 2 }}>
+                <EmployeeBlock />
+            </Container>
+            <Container>
                 <CallbackBlock />
             </Container>
         </Box>

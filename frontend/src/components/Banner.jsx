@@ -33,22 +33,14 @@ const Banner = ({ src, loading, error }) => {
         </Box>
     )
 
-    if (error) return (<Box
-        component='footer'
-        sx={{
-            py: 3,
-            px: 2,
-            backgroundColor: 'grey.50'
-        }}>
-        <Container maxWidth='lg'>
-            <Alert severity='error' sx={{
-                mt: 2
-            }}>
+    if (error) return (
+        <Container>
+            <Alert variant='filled' severity='error'>
                 <AlertTitle>Ошибка</AlertTitle>
-                {error.message}
+                {error?.message}
             </Alert>
         </Container>
-    </Box>)
+    )
 
     const iconMap = {
         HelpOutline,

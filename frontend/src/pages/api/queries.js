@@ -86,6 +86,17 @@ query HomePage{
         }
       }
     }
+    seo {
+      id
+      metaTitle
+      metaDescription
+      metaRobots
+      keywords
+      canonicalURL
+      shareImage {
+        url
+      }
+    }
   }
   services(filters: { popular: { eq: true }}, pagination: { limit: 12 }){
     title
@@ -229,6 +240,17 @@ query ServiceCategory($slug: String!) {
       discount
       discountAmount
     }
+    seo {
+      metaTitle
+      metaDescription
+      id
+      keywords
+      metaRobots
+      shareImage {
+        url
+      }
+      canonicalURL
+    }
   }
   calculateWindow {
     title
@@ -267,6 +289,7 @@ query Discounts {
     documentId
     discountAmount
     active
+    slug
     image {
       url
       formats
@@ -278,6 +301,17 @@ query Discounts {
 export const GET_ABOUT_PAGE = gql`
 query AboutPage {
   aboutPage {
+  seo {
+      shareImage {
+        url
+      }
+      metaTitle
+      metaRobots
+      metaDescription
+      keywords
+      id
+      canonicalURL
+    }
     documentId
     title
     description
@@ -359,6 +393,53 @@ query FaqPage {
         title
         answer
       }
+    }
+  }
+}
+`
+
+export const GET_EMPLOYEES = gql`
+query Employees {
+  employees {
+    documentId
+    name
+    position
+    workExperienceAt
+    photo {
+      formats
+    }
+  }
+}
+`
+
+export const GET_AKCII_PAGE =  gql`
+query AkciiPage {
+  akciiPage {
+    seo {
+      shareImage {
+        url
+      }
+      metaTitle
+      metaRobots
+      metaDescription
+      keywords
+      id
+      canonicalURL
+    }
+    title
+    documentId
+    description
+    discounts {
+      title
+      shortDescription
+      image {
+        url
+        formats
+      }
+      documentId
+      discountAmount
+      active
+      slug
     }
   }
 }

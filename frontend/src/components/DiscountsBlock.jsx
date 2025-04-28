@@ -13,7 +13,8 @@ import {
     Typography,
     Badge
 } from "@mui/material"
-import Markdown from 'react-markdown'
+import LinkWrapper from "./LinkWrapper"
+import { ArrowForward } from "@mui/icons-material"
 
 const DiscountsBlock = () => {
     const { loading, data, error } = useQuery(GET_DISCOUNTS);
@@ -26,9 +27,29 @@ const DiscountsBlock = () => {
     console.log(data)
     return (
         <Container sx={{ py: 2 }}>
-            <Typography variant='h2' sx={{ mb: 2 }}>Акции</Typography>
+            <LinkWrapper href={'/akcii'}>
+                <Typography
+                    variant='h2'
+                    sx={{
+                        mb: 2,
+                        textDecoration: 'underline',
+                        color: 'primary.main',
+                        '&:hover': {
+                            '& .MuiSvgIcon-root': {
+                                ml: 2
+                            },
+                        }
+
+                    }}>
+                    Акции
+                    <ArrowForward sx={{
+                        color: 'error.main',
+                        ml: 1
+                    }} />
+                </Typography>
+            </LinkWrapper>
             <Grid container spacing={2}>
-                {data?.discounts?.map((discount) => (
+                {data?.discounts?.slice(0, 4).map((discount) => (
                     <Grid
                         key={discount?.documentId}
                         size={{ xs: 12, sm: 4, md: 3 }}
@@ -37,34 +58,25 @@ const DiscountsBlock = () => {
                             mt: { xs: 1 }
                         }}>
                         <Card sx={{ height: '100%' }}>
-                            <CardActionArea sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                height: '100%',
-                                justifyContent: 'flex-start'
-                            }}>
-                                <CardMedia
-                                    component='img'
-                                    alt={discount?.title}
-                                    src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + discount?.image?.formats?.small?.url}
-                                    loading='lazy'
+                            <LinkWrapper href={`/akcii#${discount?.slug}`}>
+
+                                <CardActionArea sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    height: '100%',
+                                    justifyContent: 'flex-start'
+                                }}>
+                                    <CardMedia
+                                        component='img'
+                                        alt={discount?.title}
+                                        src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + discount?.image?.formats?.small?.url}
+                                        loading='lazy'
                                     />
-                                <CardContent>
-                                    <Typography variant='h4'>{discount?.title}</Typography>
-                                    <Typography
-                                        component='div'
-                                        variant='body2'
-                                        sx={{
-                                            my: 1,
-                                            '& ol, ul': {
-                                                ml: 2
-                                            },
-                                            fontSize: '.8rem'
-                                        }}>
-                                        <Markdown>{discount?.shortDescription}</Markdown>
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
+                                    <CardContent>
+                                        <Typography variant='h4'>{discount?.title}</Typography>
+                                    </CardContent>
+                                </CardActionArea>
+                            </LinkWrapper>
                         </Card>
                         <Badge
                             badgeContent={'до -' + discount?.discountAmount + "%"}

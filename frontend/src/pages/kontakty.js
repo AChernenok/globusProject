@@ -8,6 +8,7 @@ import { AlternateEmail, Phone, WhereToVote } from "@mui/icons-material"
 import { YandexMapEmbed } from "@/components/YandexMapEmbed"
 import WindowCalculate from "@/components/WindowCalculate"
 import MasterBlock from "@/components/MasterBlock"
+import DiscountsBlock from "@/components/DiscountsBlock"
 
 const Contacts = () => {
     const { loading, data, error } = useQuery(GET_CONTACT_PAGE)
@@ -144,6 +145,9 @@ const Contacts = () => {
                         </Paper>
                     </Grid>
                 </Grid>
+            </Container>
+            <DiscountsBlock />
+            <Container>
                 <Typography
                     variant='h4'
                     sx={{ my: 2 }}

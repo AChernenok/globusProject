@@ -4,7 +4,8 @@
   "info": {
     "singularName": "portfolio-page",
     "pluralName": "portfolio-pages",
-    "displayName": "PortfolioPage"
+    "displayName": "PortfolioPage",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,6 +25,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::portfolio-item.portfolio-item"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.seo"
     }
   }
 }

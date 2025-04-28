@@ -13,11 +13,11 @@ import {
     Skeleton,
     Grid,
     Menu,
-    Tabs,
     Paper,
-    Tab,
     MenuItem,
     ListItemText,
+    Alert,
+    AlertTitle,
 } from '@mui/material';
 import { useState } from 'react';
 import { GET_HEADER } from '../pages/api/queries';
@@ -33,16 +33,12 @@ import {
 } from '@mui/icons-material'
 import CallBackModal from './CallbackModal';
 import LinkWrapper from './LinkWrapper';
-import { useRouter } from 'next/router'
 
 const Header = () => {
     const { loading, data, error } = useQuery(GET_HEADER);
     const [mobileOpen, setMobileOpen] = useState(false);
-    const router = useRouter();
-    const pathname = router.pathname;
     // Button Services
     const [anchorEl, setAnchorEl] = useState(null);
-    const [tabValue, setTabValue] = useState(0);
     const open = Boolean(anchorEl);
 
     // Callback Modal
@@ -94,7 +90,16 @@ const Header = () => {
         </>
     )
 
-    if (error) return <div>Ошибка: {error}</div>
+    if (error) return (
+        <Container sx={{ my: 2 }}>
+            <Box component='header'>
+                <Alert variant='filled' severity='error'>
+                    <AlertTitle>Ошибка</AlertTitle>
+                    {error?.message}
+                </Alert>
+            </Box>
+        </Container>
+    )
 
     function parseTimeString(str) {
         // Ищем последнее вхождение цифры перед примечанием
@@ -119,10 +124,6 @@ const Header = () => {
     const handleHeaderServicesClose = () => {
         setAnchorEl(null);
     };
-
-    const handleTabChange = (event, newValue) => {
-        setTabValue(newValue);
-    }
 
     const handleCallbackModal = () => {
         setOpenModal(!openModal)
@@ -232,7 +233,7 @@ const Header = () => {
                                                 width: '100%',
                                                 flexDirection: 'column'
                                             }}>
-                                                {data?.serviceCategories?.map((category) => (
+                                                {data?.serviceCategories?.slice(0, 4).map((category) => (
                                                     <LinkWrapper
                                                         key={category?.documentId}
                                                         href={'/uslugi/' + category?.slug}>
@@ -257,6 +258,16 @@ const Header = () => {
                                                         </MenuItem>
                                                     </LinkWrapper>
                                                 ))}
+                                                <LinkWrapper href="/uslugi">
+                                                    <Button
+                                                        variant='contained'
+                                                        onClick={handleHeaderServicesClose}
+                                                        fullWidth
+                                                        size='medium'
+                                                    >
+                                                        Полный список услуг
+                                                    </Button>
+                                                </LinkWrapper>
                                             </Paper>
                                         </Menu>
                                     </Box>

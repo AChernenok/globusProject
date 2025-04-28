@@ -8,7 +8,7 @@ import {
     Link,
     Skeleton,
     Typography,
-    useTheme,
+    AlertTitle,
     Divider
 } from '@mui/material'
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -46,7 +46,7 @@ const Footer = () => {
                 backgroundColor: 'grey.50'
             }}>
             <Container maxWidth='lg'>
-                <Alert severity='error' sx={{
+                <Alert severity='error' variant='filled' sx={{
                     mt: 2
                 }}>
                     <AlertTitle>Ошибка</AlertTitle>

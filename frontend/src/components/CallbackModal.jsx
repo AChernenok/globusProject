@@ -168,7 +168,7 @@ const CallBackModal = ({ open, onClose, formCalculateData = {}, resetForm }) => 
         } catch (error) {
             setAlert({
                 open: true,
-                message: 'Ошибка отправки: ' + error.message,
+                message: `Ошибка отправки: ${error?.message || 'Неизвестная ошибка'}`,
                 severity: 'error',
             });
         } finally {

@@ -23,6 +23,7 @@ import WindowCalculate from "@/components/WindowCalculate"
 import PortfolioBlock from "@/components/PortfolioBlock"
 import DiscountsBlock from "@/components/DiscountsBlock"
 import Breadcrumb from "@/components/Breadcrumb"
+import Seo from "@/components/Seo"
 
 const CategoryPage = () => {
     const router = useRouter()
@@ -50,7 +51,7 @@ const CategoryPage = () => {
     console.log(category.services.find(service => service.price >= 0))
     return (
         <Box>
-
+            <Seo seo={category?.seo} />
             <Container sx={{ py: 2 }}>
                 <Typography variant='h1' fontSize={'3rem'}>{category?.title}</Typography>
                 <Breadcrumb currentPage={category?.title} slug={router.pathname.split('/')[1]} />

@@ -36,6 +36,10 @@
         "maxLengthCharacters": 500
       },
       "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

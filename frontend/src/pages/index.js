@@ -9,14 +9,20 @@ import MasterBlock from "@/components/MasterBlock";
 import WindowCalculate from "@/components/WindowCalculate";
 import PortfolioBlock from "@/components/PortfolioBlock";
 import ServecesTable from "@/components/ServicesTable";
+import Seo from "@/components/Seo";
+import EmployeeBlock from "@/components/EmployeeBlock";
 
 const HomePage = () => {
   const { loading, data, error } = useQuery(GET_HOME_PAGE);
 
   console.log(data)
-
+  let seo = null
+  if (!loading && !error) {
+    seo = data?.homePage?.seo
+  }
   return (
     <>
+      <Seo seo={seo} />
       <Banner
         src={data?.homePage?.sections.find(obj => obj.__typename === 'ComponentBannerHeroBanner')}
         loading={loading}
@@ -51,6 +57,7 @@ const HomePage = () => {
       </Container>
       <Container>
         <ServecesTable />
+        <EmployeeBlock />
       </Container>
     </>
   )

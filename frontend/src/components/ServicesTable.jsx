@@ -18,7 +18,6 @@ const ServecesTable = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    console.log(data)
     return (
         <Grid container spacing={1} sx={{ py: 2 }}>
             <Grid size={{ xs: 12 }} sx={{ mb: 2 }}>

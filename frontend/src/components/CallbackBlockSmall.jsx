@@ -4,7 +4,7 @@ import { WhatsApp, Telegram } from '@mui/icons-material'
 const CallbackBlockSmall = () => {
     return (
         <Paper elevation={2} sx={{ p: 2 }}>
-            <Typography variant='h5'>Вызвать мастера</Typography>
+            <Typography variant='h4'>Вызвать мастера</Typography>
             <Box sx={{ my: 2 }}>
                 <Typography variant='body1'>Оставьте сообщение в WhatsApp или Telegram.</Typography>
                 <Typography variant='body1'>Мы не передаем данные третьим лицам и не рассылаем рекламу.</Typography>
