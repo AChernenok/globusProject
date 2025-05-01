@@ -4,6 +4,7 @@ import { GET_SERVICE_PAGE } from "../api/queries"
 import { NavigateNext } from "@mui/icons-material";
 import { useTheme } from '@mui/material/styles'
 import LinkWrapper from "@/components/LinkWrapper";
+import Seo from "@/components/Seo";
 
 const Services = () => {
     const theme = useTheme()
@@ -39,6 +40,7 @@ const Services = () => {
     console.log('Colors:', theme.palette)
     return (
         <Container sx={{ mt: 2 }}>
+            <Seo seo={data?.servicePage?.seo} />
             <Typography variant='h1' fontSize={'2rem'}>{data?.servicePage?.title}</Typography>
             <Typography variant='subtitle1' color='error'>{data?.servicePage?.description}</Typography>
             <Stack spacing={2} sx={{ py: 2 }}>

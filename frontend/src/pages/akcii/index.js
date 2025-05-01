@@ -48,7 +48,7 @@ const Akcii = () => {
             <Grid container spacing={2} sx={{ py: 2 }}>
                 {data?.akciiPage?.discounts?.filter((discount) => discount?.active).map((discount) => (
                     <Grid key={discount?.documentId} size={{ xs: 12 }} id={discount?.slug}>
-                        <Paper elevation={2} sx={{ p: 2 }}>
+                        <Paper elevation={2} sx={{ p: 2, position: 'relative' }}>
                             <Grid container spacing={2}>
                                 <Grid size={{ xs: 12, sm: 4, md: 3 }}>
                                     <Box
@@ -60,18 +60,7 @@ const Akcii = () => {
                                     />
                                 </Grid>
                                 <Grid size={{ xs: 12, sm: 8, md: 9 }}>
-                                    <Badge
-                                        badgeContent={`-${discount?.discountAmount}%`}
-                                        color='error'
-                                        sx={{
-                                            '& .MuiBadge-badge': {
-                                                right: '-20px',
-                                                fontWeight: 700
-                                            }
-                                        }}
-                                    >
-                                        <Typography variant='h3'>{discount?.title}</Typography>
-                                    </Badge>
+                                    <Typography variant='h3'>{discount?.title}</Typography>
                                     <Typography
                                         variant='body1'
                                         component='div'
@@ -88,6 +77,15 @@ const Akcii = () => {
                                     </Typography>
                                 </Grid>
                             </Grid>
+                            <Badge
+                                badgeContent={`-${discount?.discountAmount}%`}
+                                color='error'
+                                sx={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: '20px'
+                                }}
+                            />
                         </Paper>
                     </Grid>
                 ))}

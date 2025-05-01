@@ -146,11 +146,22 @@ query HomePage{
 `
 
 export const GET_PRIVACY_POLICY_PAGE = gql`
-query PrivacyPolicy{
+query PrivacyPolicyPage {
   privacyPolicyPage {
     title
-    description
     slug
+    description
+    seo {
+      canonicalURL
+      id
+      keywords
+      metaDescription
+      metaRobots
+      metaTitle
+      shareImage {
+        url
+      }
+    }
   }
 }
 `
@@ -203,6 +214,17 @@ query ServicePage {
   servicePage {
     title
     description
+    seo {
+      metaTitle
+      metaDescription
+      id
+      keywords
+      metaRobots
+      shareImage {
+        url
+      }
+      canonicalURL
+    }
     service_categories {
       title
       slug
@@ -371,6 +393,17 @@ query ContactPage {
     address
     dataIP
     schedule
+    seo {
+      metaTitle
+      metaDescription
+      id
+      keywords
+      metaRobots
+      shareImage {
+        url
+      }
+      canonicalURL
+    }
     additionalBlock {
       title
       id
@@ -444,3 +477,4 @@ query AkciiPage {
   }
 }
 `
+

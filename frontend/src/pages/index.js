@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Box, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Banner from "../components/Banner";
 import { GET_HOME_PAGE } from './api/queries'
 import { useQuery } from "@apollo/client";
@@ -21,7 +21,7 @@ const HomePage = () => {
     seo = data?.homePage?.seo
   }
   return (
-    <>
+    <Box component='section'>
       <Seo seo={seo} />
       <Banner
         src={data?.homePage?.sections.find(obj => obj.__typename === 'ComponentBannerHeroBanner')}
@@ -59,7 +59,7 @@ const HomePage = () => {
         <ServecesTable />
         <EmployeeBlock />
       </Container>
-    </>
+    </Box>
   )
 }
 

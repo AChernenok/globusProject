@@ -194,7 +194,7 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
                                                 <Box sx={{
                                                     position: 'absolute',
                                                     width: '100%',
-                                                    top: '15%',
+                                                    top: windowType.name === 'Двухстворчатое с блоком' ? '33%' : '15%',
                                                     justifyContent: 'center'
                                                 }}>
                                                     {Array.from({ length: windowType.openings }).map((_, idx) => {
@@ -212,9 +212,9 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
                                                                         checked={isChecked}
                                                                         sx={{
                                                                             p: '0',
-                                                                            color: 'grey.50',
+                                                                            color: 'text.secondary',
                                                                             '&.Mui-checked': {
-                                                                                color: 'grey.50'
+                                                                                color: 'text.primary'
                                                                             }
                                                                         }}
                                                                     />
@@ -223,7 +223,7 @@ const WindowCalculate = ({ calculateBlock, loading }) => {
                                                                 labelPlacement='top'
                                                                 sx={{
                                                                     m: 0,
-                                                                    color: 'grey.100',
+                                                                    color: 'text.primary',
                                                                     fontWeight: '300',
                                                                     p: '0 5px'
                                                                 }}

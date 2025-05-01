@@ -16,6 +16,7 @@ import {
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link as RouterLink } from 'next/link';
+import LinkWrapper from './LinkWrapper';
 
 const CallBackModal = ({ open, onClose, formCalculateData = {}, resetForm }) => {
     const [formData, setFormData] = useState({
@@ -184,7 +185,9 @@ const CallBackModal = ({ open, onClose, formCalculateData = {}, resetForm }) => 
         });
         setFormData({ name: '', phone: '', description: '', photo: null });
         setCaptcha(null);
-        resetForm();
+        if (resetForm) {
+            resetForm();
+        }
         onClose();
     };
 
@@ -342,7 +345,13 @@ const CallBackModal = ({ open, onClose, formCalculateData = {}, resetForm }) => 
                                 )}
                             </Box>
                             <Box sx={{ my: 2 }}>
-                                <Typography variant='caption'>Отправляя данные вы соглашаетесь с <Link component={RouterLink} to={'/politika-konfidenczialnosti'} onClick={onClose}>политикой конфиденциальности</Link></Typography>
+                                <Typography variant='caption'>
+                                    Отправляя данные вы соглашаетесь с{' '}
+                                    <LinkWrapper href={'/politika-konfidenczialnosti'} onClick={onClose}>
+                                        <Link variant='text'>
+                                            политикой конфиденциальности</Link>
+                                    </LinkWrapper>
+                                </Typography>
                             </Box>
 
                             {/* Кнопки "Отмена" и "Отправить" */}
