@@ -48,7 +48,6 @@ const CategoryPage = () => {
     )
 
     const category = data?.serviceCategories[0]
-    console.log(category.services.find(service => service.price >= 0))
     return (
         <Box>
             <Seo seo={category?.seo} />

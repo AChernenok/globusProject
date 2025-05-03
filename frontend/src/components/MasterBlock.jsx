@@ -19,7 +19,6 @@ const MasterBlock = ({ master }) => {
         TaskAlt
     }
 
-    console.log(master?.buttonsGroup?.map((button) => button.buttonLink.includes('wa.me')))
     return (
         <Box sx={{
             py: 3

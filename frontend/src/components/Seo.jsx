@@ -1,9 +1,6 @@
 import Head from "next/head";
 
 const Seo = ({ seo }) => {
-
-    console.log('SEO', seo)
-
     if (seo) return (
         <Head>
             {/* Основные метатеги */}

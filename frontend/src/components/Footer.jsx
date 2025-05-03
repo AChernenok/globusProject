@@ -67,7 +67,6 @@ const Footer = () => {
     }
 
     const schedule = parseTimeString(data?.header?.schedule);
-
     return (
         <Box
             component='footer'

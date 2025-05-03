@@ -177,6 +177,7 @@ query Footer{
     phone
     logo {
       url
+      caption
     }
     emailCaption
     email

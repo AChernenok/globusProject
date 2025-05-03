@@ -27,7 +27,6 @@ const Akcii = () => {
         </Container>
     )
 
-    console.log(data)
 
     return (
         <Container sx={{ py: 2 }}>

@@ -6,7 +6,6 @@ import { Grid } from "@mui/system"
 const EmployeeBlock = () => {
     const { loading, data, error } = useQuery(GET_EMPLOYEES)
 
-    console.log(data)
     if (loading) return (
         <Grid container spacing={2} sx={{ py: 2 }}>
             <Grid size={{ xs: 6, sm: 3, md: 2 }}>

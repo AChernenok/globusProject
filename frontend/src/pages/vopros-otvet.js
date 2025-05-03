@@ -24,9 +24,6 @@ const FAQ = () => {
             <Alert variant='filled' severity='error'>{error?.message}</Alert>
         </Container>
     )
-
-    console.log(data)
-
     return (
         <Box>
             <Container sx={{ py: 2 }}>

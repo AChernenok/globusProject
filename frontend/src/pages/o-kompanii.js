@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client"
-import { Alert, Box, Container, Grid, Skeleton, Typography, Paper, Card, CardActionArea, CardContent, CardHeader } from "@mui/material"
+import { Alert, Box, Container, Grid, Skeleton, Typography, Card, CardActionArea, CardContent, CardHeader } from "@mui/material"
 import { GET_ABOUT_PAGE } from "./api/queries"
 import Markdown from "react-markdown"
 import Breadcrumb from "@/components/Breadcrumb"
@@ -11,7 +11,6 @@ import Seo from "@/components/Seo"
 const About = () => {
     const { loading, data, error } = useQuery(GET_ABOUT_PAGE)
 
-    console.log(data)
     if (loading) return (
         <Container sx={{ py: 2 }}>
             <Skeleton variant='text' height='2.25rem' width='40%' />

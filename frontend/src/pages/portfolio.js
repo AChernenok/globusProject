@@ -24,7 +24,6 @@ const Portfolio = () => {
         </Container>
     )
 
-    console.log(data)
     return (
         <Container sx={{ py: 2 }}>
             <Typography variant='h1'>{data?.portfolioPage?.title}</Typography>

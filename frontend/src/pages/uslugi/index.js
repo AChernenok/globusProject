@@ -2,12 +2,10 @@ import { useQuery } from "@apollo/client"
 import { Alert, Box, Breadcrumbs, Button, Container, Grid, Skeleton, Stack, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@mui/material"
 import { GET_SERVICE_PAGE } from "../api/queries"
 import { NavigateNext } from "@mui/icons-material";
-import { useTheme } from '@mui/material/styles'
 import LinkWrapper from "@/components/LinkWrapper";
 import Seo from "@/components/Seo";
 
 const Services = () => {
-    const theme = useTheme()
     const { loading, data, error } = useQuery(GET_SERVICE_PAGE);
 
     if (loading) return (
@@ -37,7 +35,6 @@ const Services = () => {
             <Alert variant='standard' severity='error'>{error?.message}</Alert>
         </Container>
     )
-    console.log('Colors:', theme.palette)
     return (
         <Container sx={{ mt: 2 }}>
             <Seo seo={data?.servicePage?.seo} />

@@ -29,7 +29,6 @@ const Contacts = () => {
         </Container>
     )
 
-    console.log(data)
 
     function parseTimeString(str) {
         // Ищем последнее вхождение цифры перед примечанием

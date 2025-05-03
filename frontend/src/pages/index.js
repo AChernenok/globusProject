@@ -15,7 +15,6 @@ import EmployeeBlock from "@/components/EmployeeBlock";
 const HomePage = () => {
   const { loading, data, error } = useQuery(GET_HOME_PAGE);
 
-  console.log(data)
   let seo = null
   if (!loading && !error) {
     seo = data?.homePage?.seo

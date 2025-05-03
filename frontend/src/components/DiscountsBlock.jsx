@@ -24,7 +24,6 @@ const DiscountsBlock = () => {
     </Box>)
 
     if (error) return (<Alert variant='filled' severity='error'>{error?.message}</Alert>)
-    console.log(data)
     return (
         <Container sx={{ py: 2 }}>
             <LinkWrapper href={'/akcii'}>
