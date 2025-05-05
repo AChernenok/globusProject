@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import {
     Box,
     Button,
@@ -15,7 +16,7 @@ import {
 } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import CloseIcon from '@mui/icons-material/Close';
-import { Link as RouterLink } from 'next/link';
+
 import LinkWrapper from './LinkWrapper';
 
 const CallBackModal = ({ open, onClose, formCalculateData = {}, resetForm }) => {
@@ -309,14 +310,14 @@ const CallBackModal = ({ open, onClose, formCalculateData = {}, resetForm }) => 
                                                 mr: 2,
                                             }}
                                         >
-                                            <img
+                                            <Image
                                                 src={URL.createObjectURL(formData.photo)}
                                                 alt="Preview"
+                                                fill
                                                 style={{
-                                                    width: '100%',
-                                                    height: '100%',
                                                     objectFit: 'cover',
                                                 }}
+                                                unoptimized
                                             />
                                         </Box>
 

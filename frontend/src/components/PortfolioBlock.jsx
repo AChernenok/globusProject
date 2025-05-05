@@ -16,6 +16,7 @@ import ReactMarkdown from 'react-markdown'
 import { ExpandMore as ExpandMoreIcon, InsertLink as InsertLinkIcon } from '@mui/icons-material'
 import { useState } from 'react'
 import { styled } from '@mui/material/styles'
+
 import LinkWrapper from './LinkWrapper'
 
 const PortfolioBlock = ({ loading, data }) => {

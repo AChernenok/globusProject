@@ -5,7 +5,7 @@ const LinkWrapper = forwardRef(function LinkWrapper(
   { href, as, passHref = true, children, ...props },
   ref
 ) {
-  return (
+  if (href) return (
     <NextLink
       href={href}
       as={as}

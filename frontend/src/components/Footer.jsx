@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import { GET_FOOTER } from '../pages/api/queries'
 import {
     Alert,
     Box,
@@ -15,7 +14,10 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import PhoneIcon from '@mui/icons-material/Phone';
 import TelegramIcon from '@mui/icons-material/Telegram';
+
+import { GET_FOOTER } from '../pages/api/queries'
 import WeekIcon from '../../public/icons/WeekIcon';
+
 import LinkWrapper from './LinkWrapper';
 
 const Footer = () => {

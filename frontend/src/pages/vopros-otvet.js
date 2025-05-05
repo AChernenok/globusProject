@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client"
-import { GET_FAQ_PAGE } from "./api/queries"
 import { Container } from "@mui/system"
 import { Accordion, AccordionDetails, AccordionSummary, Alert, Skeleton, Typography, Box } from "@mui/material"
 import Markdown from "react-markdown"
 import { ExpandMore } from "@mui/icons-material"
+
+import { GET_FAQ_PAGE } from "./api/queries"
+
 import CallbackBlockSmall from "@/components/CallbackBlockSmall"
 import DiscountsBlock from "@/components/DiscountsBlock"
 import Breadcrumb from "@/components/Breadcrumb"

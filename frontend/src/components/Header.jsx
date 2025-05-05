@@ -20,9 +20,7 @@ import {
     AlertTitle,
 } from '@mui/material';
 import { useState } from 'react';
-import { GET_HEADER } from '../pages/api/queries';
 import { useQuery } from '@apollo/client';
-import WeekIcon from '../../public/icons/WeekIcon';
 import {
     AlternateEmail as AlternateEmailIcon,
     Phone as PhoneIcon,
@@ -31,6 +29,11 @@ import {
     Close as CloseIcon,
     ChevronRight as ChevronRightIcon,
 } from '@mui/icons-material'
+
+import { GET_HEADER } from '../pages/api/queries';
+import WeekIcon from '../../public/icons/WeekIcon';
+
+
 import CallBackModal from './CallbackModal';
 import LinkWrapper from './LinkWrapper';
 

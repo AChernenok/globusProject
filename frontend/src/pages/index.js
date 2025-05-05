@@ -1,9 +1,12 @@
 import { Box, Container } from "@mui/material";
-import Banner from "../components/Banner";
-import { GET_HOME_PAGE } from './api/queries'
 import { useQuery } from "@apollo/client";
+
+import Banner from "../components/Banner";
 import CallbackBlock from "../components/CallbackBlock";
 import PopularServiceBlock from "../components/PopularServicesBlock";
+
+import { GET_HOME_PAGE } from './api/queries'
+
 import Advantages from "@/components/Advantages";
 import MasterBlock from "@/components/MasterBlock";
 import WindowCalculate from "@/components/WindowCalculate";

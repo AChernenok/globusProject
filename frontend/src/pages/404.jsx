@@ -1,4 +1,5 @@
 import { Container, Alert, Typography } from '@mui/material'
+
 import LinkWrapper from '../components/LinkWrapper'
 
 const Page404 = () => {

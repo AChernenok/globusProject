@@ -1,10 +1,13 @@
 import { useQuery } from "@apollo/client"
 import { Alert, Box, Button, Container, Grid, Link, Paper, Skeleton, Typography } from "@mui/material"
-import { GET_CONTACT_PAGE } from "./api/queries"
-import Breadcrumb from "@/components/Breadcrumb"
 import Markdown from "react-markdown"
-import WeekIcon from "../../public/icons/WeekIcon"
 import { AlternateEmail, Phone, WhereToVote } from "@mui/icons-material"
+
+import WeekIcon from "../../public/icons/WeekIcon"
+
+import { GET_CONTACT_PAGE } from "./api/queries"
+
+import Breadcrumb from "@/components/Breadcrumb"
 import { YandexMapEmbed } from "@/components/YandexMapEmbed"
 import WindowCalculate from "@/components/WindowCalculate"
 import MasterBlock from "@/components/MasterBlock"

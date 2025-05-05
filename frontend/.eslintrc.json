@@ -1,0 +1,28 @@
+{
+    "extends": "next/core-web-vitals",
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "no-console": "warn",
+        "import/order": [
+            "error",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    "parent",
+                    "sibling",
+                    "index"
+                ],
+                "newlines-between": "always"
+            }
+        ]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}

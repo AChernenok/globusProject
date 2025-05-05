@@ -203,6 +203,7 @@ query ServicesPrice{
     slug
     services {
       title
+      description
       slug
       price
     }
@@ -232,6 +233,7 @@ query ServicePage {
       description
       services {
         title
+        description
         slug
         image {
           url
@@ -258,6 +260,7 @@ query ServiceCategory($slug: String!) {
     description
     services {
       title
+      description
       slug
       price
       discount

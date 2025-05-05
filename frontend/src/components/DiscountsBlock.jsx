@@ -1,4 +1,3 @@
-import { GET_DISCOUNTS } from "@/pages/api/queries"
 import { useQuery } from "@apollo/client"
 import {
     Box,
@@ -13,8 +12,11 @@ import {
     Typography,
     Badge
 } from "@mui/material"
-import LinkWrapper from "./LinkWrapper"
 import { ArrowForward } from "@mui/icons-material"
+
+import LinkWrapper from "./LinkWrapper"
+
+import { GET_DISCOUNTS } from "@/pages/api/queries"
 
 const DiscountsBlock = () => {
     const { loading, data, error } = useQuery(GET_DISCOUNTS);

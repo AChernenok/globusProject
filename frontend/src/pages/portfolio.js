@@ -1,7 +1,9 @@
 import { useQuery } from "@apollo/client"
-import { GET_PORTFOLIO_ITEMS } from "./api/queries"
 import { Alert, Box, Button, Container, Grid, Paper, Skeleton, Typography } from "@mui/material"
 import Markdown from "react-markdown"
+
+import { GET_PORTFOLIO_ITEMS } from "./api/queries"
+
 import LinkWrapper from "@/components/LinkWrapper"
 import Breadcrumb from "@/components/Breadcrumb"
 

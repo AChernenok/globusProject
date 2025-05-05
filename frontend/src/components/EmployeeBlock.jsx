@@ -1,7 +1,8 @@
-import { GET_EMPLOYEES } from "@/pages/api/queries"
 import { useQuery } from "@apollo/client"
 import { Alert, Card, CardActionArea, CardContent, CardMedia, Skeleton, Typography } from "@mui/material"
 import { Grid } from "@mui/system"
+
+import { GET_EMPLOYEES } from "@/pages/api/queries"
 
 const EmployeeBlock = () => {
     const { loading, data, error } = useQuery(GET_EMPLOYEES)

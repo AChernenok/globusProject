@@ -1,5 +1,6 @@
 import { Stack, Breadcrumbs, Typography } from '@mui/material'
 import { NavigateNext } from '@mui/icons-material'
+
 import LinkWrapper from './LinkWrapper'
 
 const Breadcrumb = ({ currentPage, slug }) => {

@@ -1,7 +1,9 @@
 import { useQuery } from "@apollo/client"
 import { Alert, Box, Container, Grid, Skeleton, Typography, Card, CardActionArea, CardContent, CardHeader } from "@mui/material"
-import { GET_ABOUT_PAGE } from "./api/queries"
 import Markdown from "react-markdown"
+
+import { GET_ABOUT_PAGE } from "./api/queries"
+
 import Breadcrumb from "@/components/Breadcrumb"
 import DiscountsBlock from "@/components/DiscountsBlock"
 import CallbackBlock from "@/components/CallbackBlock"

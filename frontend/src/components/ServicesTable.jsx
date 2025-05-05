@@ -1,7 +1,8 @@
-import { GET_SERVICES_TABLE } from "@/pages/api/queries"
 import { useQuery } from "@apollo/client"
-import { Alert, Box, Grid, Skeleton, Tab, Table, TableBody, TableCell, TableContainer, TableRow, Tabs, Typography } from "@mui/material"
+import { Alert, Box, Grid, Skeleton, Tab, Table, TableBody, TableCell, TableContainer, TableRow, Tabs, Tooltip, Typography } from "@mui/material"
 import { useState } from "react"
+
+import { GET_SERVICES_TABLE } from "@/pages/api/queries"
 
 const ServecesTable = () => {
     const [value, setValue] = useState(0)
@@ -44,7 +45,11 @@ const ServecesTable = () => {
                         <TableBody>
                             {data?.serviceCategories?.[value].services.map((service) => (
                                 <TableRow key={service?.slug}>
-                                    <TableCell component='th' scope='row'>{service?.title}</TableCell>
+                                    <TableCell component='th' scope='row'>
+                                        <Tooltip title={service?.description} placement='top'>
+                                            {service?.title}
+                                        </Tooltip>
+                                    </TableCell>
                                     <TableCell component='th' scope='row' sx={{ color: 'red', fontWeight: 700 }}>от {service?.price}₽</TableCell>
                                 </TableRow>
                             ))}

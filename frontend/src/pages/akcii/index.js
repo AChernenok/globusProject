@@ -1,10 +1,12 @@
 import { useQuery } from "@apollo/client"
-import { GET_AKCII_PAGE } from "../api/queries"
 import { Box, Container, Grid } from "@mui/system"
 import { Alert, AlertTitle, Badge, Paper, Skeleton, Typography } from "@mui/material"
+import Markdown from "react-markdown"
+
+import { GET_AKCII_PAGE } from "../api/queries"
+
 import Breadcrumb from "@/components/Breadcrumb"
 import Seo from "@/components/Seo"
-import Markdown from "react-markdown"
 import CallbackBlock from "@/components/CallbackBlock"
 
 const Akcii = () => {

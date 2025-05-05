@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client"
-import { GET_PRIVACY_POLICY_PAGE } from "./api/queries"
 import { Container } from "@mui/system";
 import { Alert, Skeleton, Typography } from "@mui/material";
-import Breadcrumb from "@/components/Breadcrumb";
 import Markdown from "react-markdown";
+
+import { GET_PRIVACY_POLICY_PAGE } from "./api/queries"
+
+import Breadcrumb from "@/components/Breadcrumb";
 import Seo from "@/components/Seo";
 
 const PrivacyPolicy = () => {

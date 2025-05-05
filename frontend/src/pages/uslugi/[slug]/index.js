@@ -1,29 +1,30 @@
-import { GET_SERVICE_CATEGORY } from "@/pages/api/queries"
 import { useQuery } from "@apollo/client"
 import {
     Alert,
     Container,
     Skeleton,
     Typography,
-    Stack,
-    Breadcrumbs,
     Grid,
     Box,
     TableContainer,
     Table,
     TableBody,
     TableRow,
-    TableCell
+    TableCell,
+    Tooltip,
+    IconButton
 } from "@mui/material"
-import { NavigateNext } from '@mui/icons-material'
-import LinkWrapper from "../../../components/LinkWrapper"
 import { useRouter } from "next/router"
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+
+import { GET_SERVICE_CATEGORY } from "@/pages/api/queries"
 import CallbackBlockSmall from "@/components/CallbackBlockSmall"
 import WindowCalculate from "@/components/WindowCalculate"
 import PortfolioBlock from "@/components/PortfolioBlock"
 import DiscountsBlock from "@/components/DiscountsBlock"
 import Breadcrumb from "@/components/Breadcrumb"
 import Seo from "@/components/Seo"
+
 
 const CategoryPage = () => {
     const router = useRouter()
@@ -75,7 +76,41 @@ const CategoryPage = () => {
                             <TableBody>
                                 {category?.services.map((service) => (
                                     <TableRow key={service?.slug}>
-                                        <TableCell component='th' scope='row'>{service?.title}</TableCell>
+                                        <TableCell component='th' scope='row' sx={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            flexWrap: 'nowrap',
+                                            alignItems: 'center'
+                                        }}>
+                                            <Tooltip
+                                                title={service?.description || 'Описание недоступно'}
+                                                placement="top"
+                                                enterTouchDelay={0}
+                                                leaveTouchDelay={3000}
+                                                slotProps={{
+                                                    tooltip: {
+                                                        sx: {
+                                                            bgcolor: '#fff',
+                                                            color: 'text.primary',
+                                                            boxShadow: 2,
+                                                            borderRadius: 1,
+                                                            px: 1.5,
+                                                            py: 1,
+                                                            fontSize: 13,
+                                                            maxWidth: 220,
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                <IconButton
+                                                    aria-label={service?.description || 'Описание'}
+                                                    title={service?.description || 'Описание'}
+                                                >
+                                                    <HelpOutlineIcon sx={{ color: 'primary.main' }} />
+                                                </IconButton>
+                                            </Tooltip>
+                                            {service?.title}
+                                        </TableCell>
                                         <TableCell
                                             component='th'
                                             scope='row'
