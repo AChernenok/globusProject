@@ -1,9 +1,16 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/uslugi/[slug]": "pages/uslugi/[slug].js",
-  "/uslugi": "pages/uslugi.js",
-  "/404": "pages/404.js",
-  "/o-kompanii": "pages/o-kompanii.js"
+  "/404": "pages/404.html",
+  "/_error": "pages/_error.js",
+  "/": "pages/index.html",
+  "/o-kompanii": "pages/o-kompanii.html",
+  "/uslugi/[slug]": "pages/uslugi/[slug].html",
+  "/akcii": "pages/akcii.html",
+  "/uslugi": "pages/uslugi.html",
+  "/vopros-otvet": "pages/vopros-otvet.html",
+  "/politika-konfidenczialnosti": "pages/politika-konfidenczialnosti.html",
+  "/kontakty": "pages/kontakty.html",
+  "/portfolio": "pages/portfolio.html",
+  "/api/queries": "pages/api/queries.js"
 }
