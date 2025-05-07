@@ -9,6 +9,7 @@ import { GET_FAQ_PAGE } from "./api/queries"
 import CallbackBlockSmall from "@/components/CallbackBlockSmall"
 import DiscountsBlock from "@/components/DiscountsBlock"
 import Breadcrumb from "@/components/Breadcrumb"
+import Seo from "@/components/Seo"
 
 const FAQ = () => {
     const { loading, data, error } = useQuery(GET_FAQ_PAGE)
@@ -26,8 +27,10 @@ const FAQ = () => {
             <Alert variant='filled' severity='error'>{error?.message}</Alert>
         </Container>
     )
+
     return (
         <Box>
+            <Seo seo={data?.faqPage?.seo[0]} />
             <Container sx={{ py: 2 }}>
                 <Typography variant='h1'>{data?.faqPage?.title}</Typography>
                 <Breadcrumb currentPage={data?.faqPage?.title} />

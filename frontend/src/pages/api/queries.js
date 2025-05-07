@@ -206,6 +206,8 @@ query ServicesPrice{
       description
       slug
       price
+      discount
+      discountAmount
     }
   }
 }
@@ -431,6 +433,17 @@ query FaqPage {
         answer
       }
     }
+    seo {
+      metaTitle
+      metaDescription
+      id
+      keywords
+      metaRobots
+      shareImage {
+        url
+      }
+      canonicalURL
+    }
   }
 }
 `
@@ -481,4 +494,11 @@ query AkciiPage {
   }
 }
 `
-
+export const GET_PRICE_NOTICE = gql`
+query GlobalSetting {
+  globalSetting {
+    isPriceNoticeActive
+    priceNotice
+  }
+}
+`

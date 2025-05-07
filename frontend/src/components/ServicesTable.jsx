@@ -1,5 +1,21 @@
 import { useQuery } from "@apollo/client"
-import { Alert, Box, Grid, Skeleton, Tab, Table, TableBody, TableCell, TableContainer, TableRow, Tabs, Tooltip, Typography } from "@mui/material"
+import {
+    Alert,
+    Box,
+    Grid,
+    Skeleton,
+    IconButton,
+    Tab,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableRow,
+    Tabs,
+    Tooltip,
+    Typography
+} from "@mui/material"
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 import { useState } from "react"
 
 import { GET_SERVICES_TABLE } from "@/pages/api/queries"
@@ -31,7 +47,7 @@ const ServecesTable = () => {
                     value={value}
                     onChange={handleChange}
                     aria-label='Цены на услуги'
-                    sx={{ borderRight: 1, borderColor: 'divider' }}>
+                    sx={{ borderRight: { sm: 1 }, borderColor: 'divider' }}>
                     {data?.serviceCategories?.map((serviceCategory) => (
                         <Tab label={serviceCategory?.title} key={serviceCategory?.slug} sx={{
                             alignItems: 'flex-start'
@@ -46,11 +62,59 @@ const ServecesTable = () => {
                             {data?.serviceCategories?.[value].services.map((service) => (
                                 <TableRow key={service?.slug}>
                                     <TableCell component='th' scope='row'>
-                                        <Tooltip title={service?.description} placement='top'>
-                                            {service?.title}
+                                        <Tooltip
+                                            title={service?.description || 'Описание недоступно'}
+                                            placement="top"
+                                            enterTouchDelay={0}
+                                            leaveTouchDelay={3000}
+                                            slotProps={{
+                                                tooltip: {
+                                                    sx: {
+                                                        bgcolor: '#fff',
+                                                        color: 'text.primary',
+                                                        boxShadow: 2,
+                                                        borderRadius: 1,
+                                                        px: 1.5,
+                                                        py: 1,
+                                                        fontSize: 13,
+                                                        maxWidth: 220,
+                                                    }
+                                                }
+                                            }}
+                                        >
+                                            <IconButton aria-label={service?.description || 'Описание'}>
+                                                <HelpOutlineIcon sx={{ color: 'primary.main' }} />
+                                            </IconButton>
                                         </Tooltip>
+                                        <Typography variant='body1' sx={{ display: 'inline-flex' }}>
+                                            {service?.title}
+                                        </Typography>
                                     </TableCell>
-                                    <TableCell component='th' scope='row' sx={{ color: 'red', fontWeight: 700 }}>от {service?.price}₽</TableCell>
+                                    <TableCell
+                                        component='th'
+                                        scope='row'
+                                        sx={{
+                                            fontWeight: 700,
+                                            textAlign: 'end'
+                                        }}>
+                                        {service?.discount
+                                            ? (
+                                                <Box>
+                                                    <Typography
+                                                        variant='caption'
+                                                        sx={{ textDecoration: 'line-through', opacity: 0.7, mr: 1 }}>
+                                                        от {service?.price}₽
+                                                    </Typography>
+                                                    <Typography variant='body2' sx={{ color: 'error.main', fontWeight: 700 }}>
+                                                        от {Math.round(service?.price - (service?.price * (service.discountAmount / 100)))}₽
+                                                    </Typography>
+                                                </Box>
+                                            ) : (
+                                                <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                                                    от {service?.price}₽
+                                                </Box>
+                                            )}
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

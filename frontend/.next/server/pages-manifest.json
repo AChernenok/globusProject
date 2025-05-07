@@ -2,15 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.html",
-  "/akcii": "pages/akcii.html",
-  "/kontakty": "pages/kontakty.html",
-  "/politika-konfidenczialnosti": "pages/politika-konfidenczialnosti.html",
-  "/": "pages/index.html",
-  "/o-kompanii": "pages/o-kompanii.html",
-  "/uslugi/[slug]": "pages/uslugi/[slug].html",
-  "/portfolio": "pages/portfolio.html",
-  "/uslugi": "pages/uslugi.html",
-  "/vopros-otvet": "pages/vopros-otvet.html",
-  "/api/queries": "pages/api/queries.js"
+  "/uslugi/[slug]": "pages/uslugi/[slug].js",
+  "/uslugi": "pages/uslugi.js",
+  "/404": "pages/404.js",
+  "/o-kompanii": "pages/o-kompanii.js"
 }

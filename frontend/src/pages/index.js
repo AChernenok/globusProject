@@ -14,6 +14,7 @@ import PortfolioBlock from "@/components/PortfolioBlock";
 import ServecesTable from "@/components/ServicesTable";
 import Seo from "@/components/Seo";
 import EmployeeBlock from "@/components/EmployeeBlock";
+import PriceNotice from "@/components/PriceNotice";
 
 const HomePage = () => {
   const { loading, data, error } = useQuery(GET_HOME_PAGE);
@@ -59,6 +60,7 @@ const HomePage = () => {
       </Container>
       <Container>
         <ServecesTable />
+        <PriceNotice />
         <EmployeeBlock />
       </Container>
     </Box>

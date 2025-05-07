@@ -24,6 +24,7 @@ import PortfolioBlock from "@/components/PortfolioBlock"
 import DiscountsBlock from "@/components/DiscountsBlock"
 import Breadcrumb from "@/components/Breadcrumb"
 import Seo from "@/components/Seo"
+import PriceNotice from "@/components/PriceNotice";
 
 
 const CategoryPage = () => {
@@ -102,10 +103,7 @@ const CategoryPage = () => {
                                                     }
                                                 }}
                                             >
-                                                <IconButton
-                                                    aria-label={service?.description || 'Описание'}
-                                                    title={service?.description || 'Описание'}
-                                                >
+                                                <IconButton aria-label={service?.description || 'Описание'}>
                                                     <HelpOutlineIcon sx={{ color: 'primary.main' }} />
                                                 </IconButton>
                                             </Tooltip>
@@ -141,6 +139,9 @@ const CategoryPage = () => {
                     </TableContainer>
                 </Container>
             </Box>
+            <Container>
+                <PriceNotice />
+            </Container>
             <DiscountsBlock />
             <WindowCalculate calculateBlock={data?.calculateWindow} loading={loading} />
             <Container>

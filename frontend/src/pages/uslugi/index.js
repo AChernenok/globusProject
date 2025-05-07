@@ -1,12 +1,13 @@
 import { useQuery } from "@apollo/client"
-import { Alert, Box, Breadcrumbs, Button, Container, Grid, IconButton, Skeleton, Stack, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from "@mui/material"
-import { NavigateNext } from "@mui/icons-material";
+import { Alert, Box, Button, Container, Grid, IconButton, Skeleton, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from "@mui/material"
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 import { GET_SERVICE_PAGE } from "../api/queries"
 
 import LinkWrapper from "@/components/LinkWrapper";
 import Seo from "@/components/Seo";
+import Breadcrumb from "@/components/Breadcrumb";
+import PriceNotice from "@/components/PriceNotice";
 
 
 const Services = () => {
@@ -43,24 +44,21 @@ const Services = () => {
         <Container sx={{ mt: 2 }}>
             <Seo seo={data?.servicePage?.seo} />
             <Typography variant='h1' fontSize={'2rem'}>{data?.servicePage?.title}</Typography>
-            <Typography variant='subtitle1' color='error'>{data?.servicePage?.description}</Typography>
-            <Stack spacing={2} sx={{ py: 2 }}>
-                <Breadcrumbs separator={<NavigateNext />} aria-label="Главная">
-                    <LinkWrapper href='/'><Typography sx={{ color: 'primary.main' }}>Главная</Typography></LinkWrapper>
-                    <Typography sx={{ color: 'text.primary' }}>Услуги</Typography>
-                </Breadcrumbs>
-            </Stack>
+            <Breadcrumb currentPage={data?.servicePage?.title} />
+            <Typography variant='subtitle1' color='error' sx={{ py: 2 }}>{data?.servicePage?.description}</Typography>
             <Grid container spacing={2}>
                 {data?.servicePage?.service_categories?.map((category) => (
-                    <Grid size={{ xs: 12, sm: 6 }} key={category?.slug}>
+                    <Grid size={{ xs: 12, sm: 6 }} key={category?.slug} sx={{ py: 2 }}>
                         <Grid container spacing={1}>
                             <Grid size={{ xs: 12, sm: 6 }}>
-                                <Box
-                                    component='img'
-                                    loading='lazy'
-                                    src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + category?.image?.url}
-                                    width={'100%'}
-                                    height={'auto'} />
+                                <LinkWrapper href={'/uslugi/' + category?.slug}>
+                                    <Box
+                                        component='img'
+                                        loading='lazy'
+                                        src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + category?.image?.url}
+                                        width={'100%'}
+                                        height={'auto'} />
+                                </LinkWrapper>
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6 }}>
                                 <Typography
@@ -77,7 +75,11 @@ const Services = () => {
                                         {category?.title}
                                     </LinkWrapper>
                                 </Typography>
-                                <Typography variant='body1'>{category?.description.substring(0, 120) + '...'}</Typography>
+                                <Typography variant='body1'>{
+                                    category?.description.length > 320
+                                        ? category?.description.substring(0, 320) + '...'
+                                        : category?.description
+                                }</Typography>
                             </Grid>
                             <Grid size={{ xs: 12 }}>
                                 <TableContainer>
@@ -85,13 +87,8 @@ const Services = () => {
                                         <TableBody>
                                             {category?.services?.slice(0, 3).map((service) => (
                                                 <TableRow key={service?.slug}>
-                                                    <TableCell component='th' scope='row' sx={{
-                                                        display: 'flex',
-                                                        flexDirection: 'row',
-                                                        flexWrap: 'nowrap',
-                                                        alignItems: 'center'
-                                                    }}>
-                                                        <Tooltip 
+                                                    <TableCell component='th' scope='row'>
+                                                        <Tooltip
                                                             title={service?.description || 'Описание недоступно'}
                                                             placement="top"
                                                             enterTouchDelay={0}
@@ -111,14 +108,11 @@ const Services = () => {
                                                                 }
                                                             }}
                                                         >
-                                                            <IconButton
-                                                                aria-label={service?.description || 'Описание'}
-                                                                title={service?.description || 'Описание'}
-                                                            >
-                                                                <HelpOutlineIcon sx={{color: 'primary.main'}} />
+                                                            <IconButton aria-label={service?.description || 'Описание'}>
+                                                                <HelpOutlineIcon sx={{ color: 'primary.main' }} />
                                                             </IconButton>
                                                         </Tooltip>
-                                                        <Typography>
+                                                        <Typography variant='body2' sx={{ display: 'inline-flex' }}>
                                                             {service?.title}
                                                         </Typography>
                                                     </TableCell>
@@ -131,13 +125,15 @@ const Services = () => {
                                                         }}>
                                                         {service?.discount
                                                             ? (
-                                                                <Box component="span">
-                                                                    <Box component="span" sx={{ textDecoration: 'line-through', opacity: 0.7, mr: 1 }}>
+                                                                <Box>
+                                                                    <Typography
+                                                                        variant='caption'
+                                                                        sx={{ textDecoration: 'line-through', opacity: 0.7, mr: 1 }}>
                                                                         от {service?.price}₽
-                                                                    </Box>
-                                                                    <Box component="span" sx={{ color: 'error.main', fontWeight: 700 }}>
+                                                                    </Typography>
+                                                                    <Typography variant='body2' sx={{ color: 'error.main', fontWeight: 700 }}>
                                                                         от {Math.round(service?.price - (service?.price * (service.discountAmount / 100)))}₽
-                                                                    </Box>
+                                                                    </Typography>
                                                                 </Box>
                                                             ) : (
                                                                 <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
@@ -165,6 +161,7 @@ const Services = () => {
                     </Grid>
                 ))}
             </Grid>
+            <PriceNotice />
         </Container>
     )
 }

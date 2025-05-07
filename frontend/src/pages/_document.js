@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="ru">
       <Head>
-        <link rel='icon' href='/logo.ico' />
+      <link rel='icon' href='https://new.okna-globus.ru/logo.ico' />
       </Head>
       <body>
         <Main />
