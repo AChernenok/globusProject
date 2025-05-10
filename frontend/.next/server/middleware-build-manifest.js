@@ -1,1 +1,45 @@
-globalThis.__BUILD_MANIFEST={polyfillFiles:["static/chunks/polyfills-42372ed130431b0a.js"],devFiles:[],ampDevFiles:[],lowPriorityFiles:[],rootMainFiles:[],rootMainFilesTree:{},pages:{"/":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/299-41a3960e3b740548.js","static/chunks/473-6c7b489dff687f2c.js","static/chunks/809-4a25cf1033806ccd.js","static/chunks/225-079a053a11c4d386.js","static/chunks/94-2d9611af259e9e5a.js","static/chunks/pages/index-268163de7661011b.js"],"/404":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/pages/404-afc2f3bda66d7169.js"],"/_app":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/css/299eb60f9ff42184.css","static/chunks/pages/_app-805ac641a681c8cd.js"],"/_error":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/pages/_error-b41dbd85229d9331.js"],"/akcii":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/299-41a3960e3b740548.js","static/chunks/pages/akcii-2e3ac48e1e272c16.js"],"/kontakty":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/299-41a3960e3b740548.js","static/chunks/417-0cdadd89cf10de66.js","static/chunks/809-4a25cf1033806ccd.js","static/chunks/94-2d9611af259e9e5a.js","static/chunks/pages/kontakty-df141f7c9245efde.js"],"/o-kompanii":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/299-41a3960e3b740548.js","static/chunks/417-0cdadd89cf10de66.js","static/chunks/pages/o-kompanii-bc08e839595b3fc9.js"],"/politika-konfidenczialnosti":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/pages/politika-konfidenczialnosti-4a8eaa7258d621f9.js"],"/portfolio":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/pages/portfolio-b9a58cd7b1871e9c.js"],"/uslugi":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/473-6c7b489dff687f2c.js","static/chunks/pages/uslugi-16f147e42f1783c1.js"],"/uslugi/[slug]":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/299-41a3960e3b740548.js","static/chunks/417-0cdadd89cf10de66.js","static/chunks/473-6c7b489dff687f2c.js","static/chunks/809-4a25cf1033806ccd.js","static/chunks/94-2d9611af259e9e5a.js","static/chunks/pages/uslugi/[slug]-f19b7a5c930e1a51.js"],"/vopros-otvet":["static/chunks/webpack-f5c9bbb7127d32ec.js","static/chunks/framework-2f335d22a7318891.js","static/chunks/main-755337d5b99a197c.js","static/chunks/495-9bb26f0a4c1c7c52.js","static/chunks/299-41a3960e3b740548.js","static/chunks/417-0cdadd89cf10de66.js","static/chunks/pages/vopros-otvet-c9145ff17f2b35b6.js"]},ampFirstPages:[]},globalThis.__BUILD_MANIFEST.lowPriorityFiles=["/static/"+process.env.__NEXT_BUILD_ID+"/_buildManifest.js",,"/static/"+process.env.__NEXT_BUILD_ID+"/_ssgManifest.js"];
+globalThis.__BUILD_MANIFEST = {
+  "polyfillFiles": [
+    "static/chunks/polyfills.js"
+  ],
+  "devFiles": [
+    "static/chunks/react-refresh.js"
+  ],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [],
+  "rootMainFilesTree": {},
+  "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
+    "/_app": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_app.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_error.js"
+    ],
+    "/akcii": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/akcii.js"
+    ],
+    "/uslugi/[slug]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/uslugi/[slug].js"
+    ]
+  },
+  "ampFirstPages": []
+};
+globalThis.__BUILD_MANIFEST.lowPriorityFiles = [
+"/static/" + process.env.__NEXT_BUILD_ID + "/_buildManifest.js",
+,"/static/" + process.env.__NEXT_BUILD_ID + "/_ssgManifest.js",
+
+];

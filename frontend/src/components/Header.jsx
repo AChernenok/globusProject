@@ -144,7 +144,12 @@ const Header = () => {
     }
 
     return (
-        <Box sx={{ pb: 10 }}>
+        <Box sx={{
+            mb: {
+                xs: 10,
+                md: 0
+            }
+        }}>
             <CallBackModal open={openModal} onClose={() => setOpenModal(false)} />
             <AppBar
                 position='fixed'
@@ -476,7 +481,11 @@ const Header = () => {
                                 <Collapse in={mobileServicesOpen} timeout='auto' unmountOnExit>
                                     <List component='div' disablePadding>
                                         {data?.serviceCategories?.slice(0, 4).map((category) => (
-                                            <LinkWrapper key={category?.documentId} href={`/uslugi/${category?.slug}`}>
+                                            <LinkWrapper
+                                                key={category?.documentId}
+                                                href={`/uslugi/${category?.slug}`}
+                                                onClick={() => { handleMobileServicesOpen(); handleDrawerToggle() }}
+                                            >
                                                 <ListItemButton sx={{ pl: 4 }}>
                                                     <ListItemText secondary={category?.title} />
                                                 </ListItemButton>

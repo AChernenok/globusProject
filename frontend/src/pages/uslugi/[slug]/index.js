@@ -54,7 +54,17 @@ const CategoryPage = () => {
         <Box>
             <Seo seo={category?.seo} />
             <Container sx={{ py: 2 }}>
-                <Typography variant='h1' fontSize={'3rem'}>{category?.title}</Typography>
+                <Typography variant='h1' sx={{
+                    fontSize: {
+                        xs: '2.25rem',
+                        sm: '2.875rem'
+                    },
+                    lineHeight: {
+                        xs: '2.625rem',
+                        sm: '3.25rem'
+
+                    }
+                }}>{category?.title}</Typography>
                 <Breadcrumb currentPage={category?.title} slug={router.pathname.split('/')[1]} />
                 <Grid container spacing={2} sx={{ justifyContent: 'space-between' }}>
                     <Grid size={{ xs: 12, sm: 5 }}>
@@ -78,7 +88,7 @@ const CategoryPage = () => {
                                 {category?.services.map((service) => (
                                     <TableRow key={service?.slug}>
                                         <TableCell component='th' scope='row'>
-                                            <Box sx={{ display: 'flex' }}>
+                                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                                 <Tooltip
                                                     title={service?.description || 'Описание недоступно'}
                                                     placement="top"

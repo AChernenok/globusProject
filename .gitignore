@@ -11,5 +11,6 @@ dist/
 
 .tmp/
 public/uploads/
-
+.next
+.strapi
 .vscode
