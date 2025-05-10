@@ -1,4 +1,4 @@
-"use strict";(()=>{var e={};e.id=761,e.ids=[761],e.modules={3480:(e,t,i)=>{e.exports=i(5600)},5600:e=>{e.exports=require("next/dist/compiled/next-server/pages-api.runtime.prod.js")},6435:(e,t)=>{Object.defineProperty(t,"M",{enumerable:!0,get:function(){return function e(t,i){return i in t?t[i]:"then"in t&&"function"==typeof t.then?t.then(t=>e(t,i)):"function"==typeof t&&"default"===i?t:void 0}}})},8667:(e,t)=>{Object.defineProperty(t,"A",{enumerable:!0,get:function(){return i}});var i=function(e){return e.PAGES="PAGES",e.PAGES_API="PAGES_API",e.APP_PAGE="APP_PAGE",e.APP_ROUTE="APP_ROUTE",e.IMAGE="IMAGE",e}({})},9891:(e,t,i)=>{i.r(t),i.d(t,{config:()=>G,default:()=>f,routeModule:()=>v});var o={};i.r(o),i.d(o,{GET_ABOUT_PAGE:()=>E,GET_AKCII_PAGE:()=>q,GET_CONTACT_PAGE:()=>A,GET_DISCOUNTS:()=>P,GET_EMPLOYEES:()=>y,GET_FAQ_PAGE:()=>T,GET_FOOTER:()=>d,GET_HEADER:()=>l,GET_HOME_PAGE:()=>c,GET_PORTFOLIO_ITEMS:()=>I,GET_PRICE_NOTICE:()=>_,GET_PRIVACY_POLICY_PAGE:()=>u,GET_SERVICES_TABLE:()=>m,GET_SERVICE_CATEGORY:()=>p,GET_SERVICE_PAGE:()=>g});var r=i(3480),a=i(8667),n=i(6435);let s=require("@apollo/client"),l=(0,s.gql)`
+"use strict";(()=>{var e={};e.id=761,e.ids=[761],e.modules={3480:(e,t,i)=>{e.exports=i(5600)},5600:e=>{e.exports=require("next/dist/compiled/next-server/pages-api.runtime.prod.js")},6435:(e,t)=>{Object.defineProperty(t,"M",{enumerable:!0,get:function(){return function e(t,i){return i in t?t[i]:"then"in t&&"function"==typeof t.then?t.then(t=>e(t,i)):"function"==typeof t&&"default"===i?t:void 0}}})},8667:(e,t)=>{Object.defineProperty(t,"A",{enumerable:!0,get:function(){return i}});var i=function(e){return e.PAGES="PAGES",e.PAGES_API="PAGES_API",e.APP_PAGE="APP_PAGE",e.APP_ROUTE="APP_ROUTE",e.IMAGE="IMAGE",e}({})},9891:(e,t,i)=>{i.r(t),i.d(t,{config:()=>G,default:()=>f,routeModule:()=>h});var o={};i.r(o),i.d(o,{GET_ABOUT_PAGE:()=>E,GET_AKCII_PAGE:()=>q,GET_CONTACT_PAGE:()=>I,GET_DISCOUNTS:()=>P,GET_EMPLOYEES:()=>y,GET_FAQ_PAGE:()=>T,GET_FOOTER:()=>d,GET_HEADER:()=>l,GET_HOME_PAGE:()=>c,GET_PORTFOLIO_ITEMS:()=>A,GET_PRICE_NOTICE:()=>_,GET_PRIVACY_POLICY_PAGE:()=>u,GET_SERVICES_TABLE:()=>m,GET_SERVICE_CATEGORY:()=>p,GET_SERVICE_PAGE:()=>g});var r=i(3480),a=i(8667),n=i(6435);let s=require("@apollo/client"),l=(0,s.gql)`
 query Header{
   header {
     title,
@@ -339,7 +339,7 @@ query AboutPage {
     slug
   }
 }
-`,I=(0,s.gql)`
+`,A=(0,s.gql)`
 query PortfolioPage {
   portfolioPage {
     title
@@ -353,20 +353,21 @@ query PortfolioPage {
       }
       documentId
       address
-      services {
-        title
-        slug
-        documentId
-        service_category {
-          documentId
-          slug
-        }
-      }
         workDescription
+    }
+    seo {
+      shareImage {
+        url
+      }
+      metaTitle
+      metaRobots
+      metaDescription
+      keywords
+      canonicalURL
     }
   }
 }
-`,A=(0,s.gql)`
+`,I=(0,s.gql)`
 query ContactPage {
   contactPage {
     title
@@ -471,4 +472,4 @@ query GlobalSetting {
     priceNotice
   }
 }
-`,f=(0,n.M)(o,"default"),G=(0,n.M)(o,"config"),v=new r.PagesAPIRouteModule({definition:{kind:a.A.PAGES_API,page:"/api/queries",pathname:"/api/queries",bundlePath:"",filename:""},userland:o})}};var t=require("../../webpack-api-runtime.js");t.C(e);var i=t(t.s=9891);module.exports=i})();
+`,f=(0,n.M)(o,"default"),G=(0,n.M)(o,"config"),h=new r.PagesAPIRouteModule({definition:{kind:a.A.PAGES_API,page:"/api/queries",pathname:"/api/queries",bundlePath:"",filename:""},userland:o})}};var t=require("../../webpack-api-runtime.js");t.C(e);var i=t(t.s=9891);module.exports=i})();

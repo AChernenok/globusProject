@@ -64,8 +64,8 @@ const PopularServiceBlock = ({ services }) => {
                                         color="error"
                                         sx={{
                                             position: 'absolute',
-                                            top: -15,
-                                            right: -20,
+                                            top: -10,
+                                            right: 0,
                                             '.MuiBadge-badge': {
                                                 padding: '0 8px',
                                                 minWidth: 'auto',

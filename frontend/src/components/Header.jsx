@@ -166,7 +166,7 @@ const Header = () => {
                                     component='img'
                                     loading='lazy'
                                     src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + data?.header?.logo?.url}
-                                    alt={data?.header?.logo?.caption}
+                                    alt={data?.header?.title}
                                     sx={{
                                         height: 40,
                                         width: 'auto',

@@ -77,37 +77,36 @@ const CategoryPage = () => {
                             <TableBody>
                                 {category?.services.map((service) => (
                                     <TableRow key={service?.slug}>
-                                        <TableCell component='th' scope='row' sx={{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            flexWrap: 'nowrap',
-                                            alignItems: 'center'
-                                        }}>
-                                            <Tooltip
-                                                title={service?.description || 'Описание недоступно'}
-                                                placement="top"
-                                                enterTouchDelay={0}
-                                                leaveTouchDelay={3000}
-                                                slotProps={{
-                                                    tooltip: {
-                                                        sx: {
-                                                            bgcolor: '#fff',
-                                                            color: 'text.primary',
-                                                            boxShadow: 2,
-                                                            borderRadius: 1,
-                                                            px: 1.5,
-                                                            py: 1,
-                                                            fontSize: 13,
-                                                            maxWidth: 220,
+                                        <TableCell component='th' scope='row'>
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Tooltip
+                                                    title={service?.description || 'Описание недоступно'}
+                                                    placement="top"
+                                                    enterTouchDelay={0}
+                                                    leaveTouchDelay={3000}
+                                                    slotProps={{
+                                                        tooltip: {
+                                                            sx: {
+                                                                bgcolor: '#fff',
+                                                                color: 'text.primary',
+                                                                boxShadow: 2,
+                                                                borderRadius: 1,
+                                                                px: 1.5,
+                                                                py: 1,
+                                                                fontSize: 13,
+                                                                maxWidth: 220,
+                                                            }
                                                         }
-                                                    }
-                                                }}
-                                            >
-                                                <IconButton aria-label={service?.description || 'Описание'}>
-                                                    <HelpOutlineIcon sx={{ color: 'primary.main' }} />
-                                                </IconButton>
-                                            </Tooltip>
-                                            {service?.title}
+                                                    }}
+                                                >
+                                                    <IconButton aria-label={service?.description || 'Описание'}>
+                                                        <HelpOutlineIcon sx={{ color: 'primary.main' }} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                                <Typography variant='body1'>
+                                                    {service?.title}
+                                                </Typography>
+                                            </Box>
                                         </TableCell>
                                         <TableCell
                                             component='th'
@@ -118,13 +117,15 @@ const CategoryPage = () => {
                                             }}>
                                             {service?.discount
                                                 ? (
-                                                    <Box component="span">
-                                                        <Box component="span" sx={{ textDecoration: 'line-through', opacity: 0.7, mr: 1 }}>
+                                                    <Box>
+                                                        <Typography
+                                                            variant='caption'
+                                                            sx={{ textDecoration: 'line-through', opacity: 0.7, mr: 1 }}>
                                                             от {service?.price}₽
-                                                        </Box>
-                                                        <Box component="span" sx={{ color: 'error.main', fontWeight: 700 }}>
+                                                        </Typography>
+                                                        <Typography variant='body2' sx={{ color: 'error.main', fontWeight: 700 }}>
                                                             от {Math.round(service?.price - (service?.price * (service.discountAmount / 100)))}₽
-                                                        </Box>
+                                                        </Typography>
                                                     </Box>
                                                 ) : (
                                                     <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>

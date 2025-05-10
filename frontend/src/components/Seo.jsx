@@ -13,7 +13,7 @@ const Seo = ({ seo }) => {
             {/* OpenGraph (для соцсетей) */}
             <meta property="og:title" content={seo.metaTitle} />
             <meta property="og:description" content={seo.metaDescription} />
-            <meta property="og:image" content={seo.shareImage.url} />
+            <meta property="og:image" content={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + seo.shareImage.url} />
             <meta property="og:type" content="website" />
 
             {/* Structured Data (JSON-LD) */}

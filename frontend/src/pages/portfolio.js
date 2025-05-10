@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/client"
-import { Alert, Box, Button, Container, Grid, Paper, Skeleton, Typography } from "@mui/material"
+import { Alert, Box,  Card, CardContent, CardHeader, CardMedia, Container, Grid, Paper, Skeleton, Typography } from "@mui/material"
 import Markdown from "react-markdown"
+import { LocationPin } from "@mui/icons-material"
 
 import { GET_PORTFOLIO_ITEMS } from "./api/queries"
 
-import LinkWrapper from "@/components/LinkWrapper"
 import Breadcrumb from "@/components/Breadcrumb"
+import Seo from "@/components/Seo"
 
 const Portfolio = () => {
     const { loading, data, error } = useQuery(GET_PORTFOLIO_ITEMS)
@@ -28,6 +29,7 @@ const Portfolio = () => {
 
     return (
         <Container sx={{ py: 2 }}>
+            <Seo seo={data?.portfolioPage?.seo[0]} />
             <Typography variant='h1'>{data?.portfolioPage?.title}</Typography>
             <Breadcrumb currentPage={data?.portfolioPage?.title} />
             <Typography
@@ -43,41 +45,69 @@ const Portfolio = () => {
             </Typography>
             <Grid container spacing={2}>
                 {data?.portfolioPage?.portfolio_items.map((item) => (
-                    <Grid
-                        size={{ xs: 12 }}
-                        key={item?.documentId}
-                        id={item?.slug}
-                    >
-                        <Paper elevation={2} sx={{ p: 2 }}>
-                            <Grid container spacing={2}>
-                                <Grid size={{ xs: 12, sm: 4, md: 3 }}>
+                    <Grid key={item?.documentId} size={{ xs: 12, sm: 6, md: 4 }}>
+                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                            <CardHeader
+                                title={item?.title}
+                                slotProps={{
+                                    title: {
+                                        variant: 'h4',
+                                        component: 'h3'
+                                    }
+                                }}
+                                sx={{
+                                    position: 'absolute',
+                                    bgcolor: 'rgba(0,0,0,0.2)',
+                                    color: 'grey.300',
+                                    borderBottomRightRadius: '2rem',
+                                }} />
+                            <CardMedia
+                                component='img'
+                                loading='lazy'
+                                image={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + item?.minImage?.url}
+                                alt={item?.title} />
+                            <CardContent sx={{ position: 'relative' }}>
+                                <Paper
+                                    elevation={2}
+                                    sx={{
+                                        position: 'absolute',
+                                        borderRadius: '50%',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        top: -50,
+                                        right: 10,
+                                        width: '90px',
+                                        height: '90px',
+                                        justifyContent: 'center'
+                                    }}>
                                     <Box
                                         component='img'
-                                        src={process.env.NEXT_PUBLIC_STRAPI_BASE_URL + item?.minImage?.url}
-                                        width='100%'
-                                        height='auto'
+                                        src='/favicon-32x32.png'
                                         loading='lazy'
+                                        sx={{
+                                            width: '24px',
+                                            height: '24px',
+                                        }}
+                                        alt='Окна Глобус'
                                     />
-                                </Grid>
-                                <Grid size={{ xs: 12, sm: 8, md: 9 }}>
-                                    <Typography variant='h5'>
-                                        <Markdown>
-                                            {item?.workDescription}
-                                        </Markdown>
-                                    </Typography>
-                                    <Box>
-                                        <Typography variant='h5' sx={{ fontWeight: 'bold' }}>Предоставленные услуги:</Typography>
-                                        {item?.services?.map((service) => (
-                                            <LinkWrapper
-                                                key={service?.documentId}
-                                                href={'/uslugi/' + service?.service_category?.slug}>
-                                                <Button>{service?.title}</Button>
-                                            </LinkWrapper>
-                                        ))}
-                                    </Box>
-                                </Grid>
-                            </Grid>
-                        </Paper>
+                                    <Typography variant='caption' color='primary.main' fontWeight='700'>Окна Глобус</Typography>
+                                </Paper>
+                                <Box sx={{ my: 3, display: 'flex', alignItems: 'center' }}>
+                                    <LocationPin sx={{ color: 'error.main' }} />
+                                    <Typography variant='caption' color='text.secondary'>{item?.address}</Typography>
+                                </Box>
+                                <Typography
+                                    variant='body2'
+                                    component='div'
+                                    sx={{ ml: 1 }}
+                                >
+                                    <Markdown>
+                                        {item?.workDescription}
+                                    </Markdown>
+                                </Typography>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 ))}
             </Grid>

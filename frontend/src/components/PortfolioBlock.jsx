@@ -13,7 +13,7 @@ import {
     Typography,
 } from '@mui/material'
 import ReactMarkdown from 'react-markdown'
-import { ExpandMore as ExpandMoreIcon, InsertLink as InsertLinkIcon } from '@mui/icons-material'
+import { ExpandMore as ExpandMoreIcon, InsertLink as InsertLinkIcon, LocationPin } from '@mui/icons-material'
 import { useState } from 'react'
 import { styled } from '@mui/material/styles'
 
@@ -77,14 +77,17 @@ const PortfolioBlock = ({ loading, data }) => {
                             <Card>
                                 <CardHeader
                                     title={portfolio.title}
-                                    subheader={portfolio.address}
-                                    sx={{
-                                        '& .MuiCardHeader-title': {
-                                            fontSize: '1.2rem',
-                                            lineHeight: '1.4rem',
-                                            fontWeight: 600,
-                                            mb: 1
+                                    slotProps={{
+                                        title: {
+                                            variant: 'h4',
+                                            component: 'h3'
                                         }
+                                    }}
+                                    sx={{
+                                        position: 'absolute',
+                                        bgcolor: 'rgba(0,0,0,0.2)',
+                                        color: 'grey.300',
+                                        borderBottomRightRadius: '2rem',
                                     }}
                                 />
                                 <CardMedia
@@ -113,6 +116,10 @@ const PortfolioBlock = ({ loading, data }) => {
                                     </ExpandMore>
                                 </CardActions>
                                 <Collapse in={expandedId === portfolio?.documentId} timeout='auto' unmountOnExit>
+                                    <Box sx={{ p: 1, display: 'flex', alignItems: 'center' }}>
+                                        <LocationPin sx={{ color: 'error.main' }} />
+                                        <Typography variant='caption' color='text.secondary'>{portfolio?.address}</Typography>
+                                    </Box>
                                     <CardContent>
                                         <Typography component='div' variant='body2'>
                                             <ReactMarkdown>{portfolio?.workDescription}</ReactMarkdown>

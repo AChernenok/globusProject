@@ -374,16 +374,17 @@ query PortfolioPage {
       }
       documentId
       address
-      services {
-        title
-        slug
-        documentId
-        service_category {
-          documentId
-          slug
-        }
-      }
         workDescription
+    }
+    seo {
+      shareImage {
+        url
+      }
+      metaTitle
+      metaRobots
+      metaDescription
+      keywords
+      canonicalURL
     }
   }
 }
