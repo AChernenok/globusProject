@@ -88,33 +88,35 @@ const Services = () => {
                                             {category?.services?.slice(0, 3).map((service) => (
                                                 <TableRow key={service?.slug}>
                                                     <TableCell component='th' scope='row'>
-                                                        <Tooltip
-                                                            title={service?.description || 'Описание недоступно'}
-                                                            placement="top"
-                                                            enterTouchDelay={0}
-                                                            leaveTouchDelay={3000}
-                                                            slotProps={{
-                                                                tooltip: {
-                                                                    sx: {
-                                                                        bgcolor: '#fff',
-                                                                        color: 'text.primary',
-                                                                        boxShadow: 2,
-                                                                        borderRadius: 1,
-                                                                        px: 1.5,
-                                                                        py: 1,
-                                                                        fontSize: 13,
-                                                                        maxWidth: 220,
+                                                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                                            <Tooltip
+                                                                title={service?.description || 'Описание недоступно'}
+                                                                placement="top"
+                                                                enterTouchDelay={0}
+                                                                leaveTouchDelay={3000}
+                                                                slotProps={{
+                                                                    tooltip: {
+                                                                        sx: {
+                                                                            bgcolor: '#fff',
+                                                                            color: 'text.primary',
+                                                                            boxShadow: 2,
+                                                                            borderRadius: 1,
+                                                                            px: 1.5,
+                                                                            py: 1,
+                                                                            fontSize: 13,
+                                                                            maxWidth: 220,
+                                                                        }
                                                                     }
-                                                                }
-                                                            }}
-                                                        >
-                                                            <IconButton aria-label={service?.description || 'Описание'}>
-                                                                <HelpOutlineIcon sx={{ color: 'primary.main' }} />
-                                                            </IconButton>
-                                                        </Tooltip>
-                                                        <Typography variant='body2' sx={{ display: 'inline-flex' }}>
-                                                            {service?.title}
-                                                        </Typography>
+                                                                }}
+                                                            >
+                                                                <IconButton aria-label={service?.description || 'Описание'}>
+                                                                    <HelpOutlineIcon sx={{ color: 'primary.main' }} />
+                                                                </IconButton>
+                                                            </Tooltip>
+                                                            <Typography variant='body1'>
+                                                                {service?.title}
+                                                            </Typography>
+                                                        </Box>
                                                     </TableCell>
                                                     <TableCell
                                                         component='th'

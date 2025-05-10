@@ -10,10 +10,10 @@ globalThis.__BUILD_MANIFEST = {
   "rootMainFiles": [],
   "rootMainFilesTree": {},
   "pages": {
-    "/": [
+    "/404": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/pages/404.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
@@ -25,10 +25,10 @@ globalThis.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/akcii": [
+    "/uslugi": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/akcii.js"
+      "static/chunks/pages/uslugi.js"
     ],
     "/uslugi/[slug]": [
       "static/chunks/webpack.js",

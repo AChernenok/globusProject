@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
+  "/uslugi": "pages/uslugi.js",
   "/uslugi/[slug]": "pages/uslugi/[slug].js",
-  "/akcii": "pages/akcii.js",
-  "/o-kompanii": "pages/o-kompanii.js"
+  "/404": "pages/404.js"
 }
