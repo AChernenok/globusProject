@@ -18,8 +18,12 @@ import {
     ListItemText,
     Alert,
     AlertTitle,
+    ListItemButton,
+    ListItemIcon,
+    Divider,
+    Collapse,
 } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import {
     AlternateEmail as AlternateEmailIcon,
@@ -28,6 +32,8 @@ import {
     Menu as MenuIcon,
     Close as CloseIcon,
     ChevronRight as ChevronRightIcon,
+    ExpandLess,
+    ExpandMore,
 } from '@mui/icons-material'
 
 import { GET_HEADER } from '../pages/api/queries';
@@ -40,6 +46,7 @@ import LinkWrapper from './LinkWrapper';
 const Header = () => {
     const { loading, data, error } = useQuery(GET_HEADER);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
     // Button Services
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -132,11 +139,15 @@ const Header = () => {
         setOpenModal(!openModal)
     }
 
+    const handleMobileServicesOpen = () => {
+        setMobileServicesOpen(!mobileServicesOpen);
+    }
+
     return (
-        <>
+        <Box sx={{ pb: 10 }}>
             <CallBackModal open={openModal} onClose={() => setOpenModal(false)} />
             <AppBar
-                position="static"
+                position='fixed'
                 color="inherit"
                 elevation={0}
                 sx={{
@@ -256,7 +267,12 @@ const Header = () => {
                                                                         ? category?.title.substring(0, 46) + '...'
                                                                         : category?.title
                                                                 }
-                                                                primaryTypographyProps={{ fontWeight: 500 }} />
+                                                                slotProps={{
+                                                                    primary: {
+                                                                        fontWeight: 500
+                                                                    }
+                                                                }}
+                                                            />
                                                             <ChevronRightIcon color='action' />
                                                         </MenuItem>
                                                     </LinkWrapper>
@@ -328,6 +344,7 @@ const Header = () => {
             <Container sx={{
                 boxShadow: '0 10px 15px -5px rgba(0,0,0,0.3)',
                 py: 2,
+                mt: 10,
                 display: { xs: 'none', md: 'block' },
                 position: 'relative',
                 zIndex: 2,
@@ -438,63 +455,123 @@ const Header = () => {
                     </IconButton>
                 </Box>
 
-                <List>
-                    {data?.header?.menu.map((item) => (
-                        <ListItem
-                            key={item.id}
-                            disablePadding
-                            sx={{
-                                borderBottom: '1px solid',
-                                borderColor: 'divider'
-                            }}
-                        >
-                            <LinkWrapper href={item.url}>
-                                <Button
-                                    fullWidth
+                <List disablePadding>
+                    {data?.header?.menu.map((item) => {
+                        return item?.url === '/uslugi' ? (
+                            <React.Fragment key={item?.id}>
+                                <ListItem
+                                    disablePadding
                                     sx={{
-                                        py: 2,
-                                        px: 3,
-                                        justifyContent: 'flex-start',
-                                        color: 'text.primary',
-                                        '& :hover': {
-                                            color: 'primary.main',
-                                            backgroundColor: 'action.hover'
-                                        }
+                                        borderBottom: '1px solid',
+                                        borderColor: 'divider',
+                                        bgcolor: 'error.main',
+                                        color: 'primary.contrastText'
                                     }}
-                                    onClick={handleDrawerToggle}
                                 >
-                                    {item.title}
-                                </Button>
+                                    <ListItemButton onClick={handleMobileServicesOpen}>
+                                        <ListItemText primary={item?.title} />
+                                        {mobileServicesOpen ? <ExpandLess /> : <ExpandMore />}
+                                    </ListItemButton>
+                                </ListItem>
+                                <Collapse in={mobileServicesOpen} timeout='auto' unmountOnExit>
+                                    <List component='div' disablePadding>
+                                        {data?.serviceCategories?.slice(0, 4).map((category) => (
+                                            <LinkWrapper key={category?.documentId} href={`/uslugi/${category?.slug}`}>
+                                                <ListItemButton sx={{ pl: 4 }}>
+                                                    <ListItemText secondary={category?.title} />
+                                                </ListItemButton>
+                                            </LinkWrapper>
+                                        ))}
+                                        <LinkWrapper href={`/uslugi`}>
+                                            <ListItemButton
+                                                sx={{
+                                                    pl: 4,
+                                                    bgcolor: 'primary.main',
+                                                    color: 'primary.contrastText'
+                                                }}
+                                                onClick={() => { handleMobileServicesOpen(); handleDrawerToggle() }}
+                                            >
+                                                <ListItemText primary='Все услуги' />
+                                            </ListItemButton>
+                                        </LinkWrapper>
+                                    </List>
+                                </Collapse>
+                            </React.Fragment>
+                        ) : (
+                            <LinkWrapper
+                                key={item.id}
+                                href={item.url}>
+                                <ListItem
+                                    disablePadding
+                                    sx={{
+                                        borderBottom: '1px solid',
+                                        borderColor: 'divider'
+                                    }}
+                                >
+                                    <ListItemButton onClick={handleDrawerToggle}>
+                                        <ListItemText primary={item?.title} />
+                                    </ListItemButton>
+                                </ListItem>
                             </LinkWrapper>
-                        </ListItem>
-                    ))}
+                        )
+                    })}
 
                     {/* Контакты в мобильном меню */}
-                    <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start', p: 3 }}>
-                        <Link
-                            href={'tel:' + data?.header?.schedule}
-                            variant="body1"
-                            fontWeight={600}
-                            gutterBottom
-                            underline='hover'
-                        >
-                            {data?.header?.phone}
-                        </Link>
-                        <Typography variant="body2" color="text.secondary" gutterBottom>
-                            {data?.header?.schedule}
-                        </Typography>
-                        <Link
-                            href={'mailto:' + data?.header?.email}
-                            color="primary"
-                            underline="hover"
-                            sx={{ mt: 1 }}
-                        >
-                            {data?.header?.email}
-                        </Link>
+                    <ListItem disablePadding>
+                        <ListItemButton component='a' href={`tel:${data?.header?.phone}`}>
+                            <ListItemIcon>
+                                <PhoneIcon sx={{ color: 'error.main' }} />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={data?.header?.phone}
+                                sx={{
+                                    color: 'primary.main',
+                                    textDecoration: 'underline'
+                                }}
+                                slotProps={{
+                                    primary: {
+                                        variant: 'h4',
+                                    }
+                                }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <ListItem disablePadding>
+                        <ListItemButton component='a' href={`mailto:${data?.header?.email}`}>
+                            <ListItemIcon>
+                                <AlternateEmailIcon sx={{ color: 'error.main' }} />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={data?.header?.email}
+                                sx={{
+                                    color: 'primary.main',
+                                    textDecoration: 'underline'
+                                }}
+                                slotProps={{
+                                    primary: {
+                                        variant: 'h4',
+                                    }
+                                }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider />
+                    <ListItem>
+                        <ListItemIcon>
+                            <WeekIcon sx={{ color: 'error.main' }} />
+                        </ListItemIcon>
+                        <ListItemText primary={data?.header?.schedule} />
+                    </ListItem>
+                    <Divider />
+                    <ListItem sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}>
+                        <ListItemButton onClick={() => { handleCallbackModal(); handleDrawerToggle() }}>
+                            <ListItemText primary='Перезвоните мне' />
+                        </ListItemButton>
                     </ListItem>
                 </List>
             </Drawer>
-        </>
+        </Box>
     );
 };
 

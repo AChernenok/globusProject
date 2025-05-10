@@ -56,7 +56,7 @@ const HomePage = () => {
         <WindowCalculate loading={loading} calculateBlock={data?.calculateWindow} />
       </Box>
       <Container>
-        <PortfolioBlock loading={loading} data={data?.portfolioItems} />
+        <PortfolioBlock loading={loading} data={data?.portfolioItems.slice(0, 3)} />
       </Container>
       <Container>
         <ServecesTable />

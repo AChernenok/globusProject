@@ -13,7 +13,7 @@ import {
     Typography,
 } from '@mui/material'
 import ReactMarkdown from 'react-markdown'
-import { ExpandMore as ExpandMoreIcon, InsertLink as InsertLinkIcon, LocationPin } from '@mui/icons-material'
+import { ExpandMore as ExpandMoreIcon, InsertLink as InsertLinkIcon, LocationPin, ArrowForward } from '@mui/icons-material'
 import { useState } from 'react'
 import { styled } from '@mui/material/styles'
 
@@ -69,7 +69,27 @@ const PortfolioBlock = ({ loading, data }) => {
 
     return (
         <Box sx={{ py: 2 }}>
-            <Typography variant='h2' sx={{ mb: 2 }}>Портфолио</Typography>
+            <LinkWrapper href={'/portfolio'}>
+                <Typography
+                    variant='h2'
+                    sx={{
+                        mb: 2,
+                        textDecoration: 'underline',
+                        color: 'primary.main',
+                        '&:hover': {
+                            '& .MuiSvgIcon-root': {
+                                ml: 2
+                            },
+                        }
+
+                    }}>
+                    Портфолио
+                    <ArrowForward sx={{
+                        color: 'error.main',
+                        ml: 1
+                    }} />
+                </Typography>
+            </LinkWrapper>
             <Grid container spacing={2}>
                 {data?.map((portfolio) => (
                     <Grid key={portfolio.documentId} size={{ xs: 12, sm: 6, md: 4 }}>
@@ -104,7 +124,7 @@ const PortfolioBlock = ({ loading, data }) => {
                                         <IconButton
                                             aria-label={portfolio?.title}
                                         >
-                                            <InsertLinkIcon color='action.active' />
+                                            <InsertLinkIcon sx={{ color: 'primary.main' }} />
                                         </IconButton>
                                     </LinkWrapper>
                                     <ExpandMore
